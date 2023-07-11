@@ -40,12 +40,16 @@ const Navbar = () => {
         pathname.includes("dashboard") ||
         data?.id ? (
           <Link
-            href="/dashboard/users"
+            href={`/dashboard/${
+              data?.isAdmin ? "teachers" : "users"
+            }`}
             className={`me-2 text-primary-blue text-lg ${
               pathname !== "/" ? "hidden" : "block"
             }`}
           >
-            {`${data?.firstName}, اهلا بك | كورساتي`}
+            {`${data?.firstName}, اهلا بك | ${
+              data?.isAdmin ? "وحدة التحكم" : "كورساتي"
+            }`}
           </Link>
         ) : (
           <>
