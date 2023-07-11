@@ -2,18 +2,25 @@
 
 import { SimpleGrid } from "@chakra-ui/react"
 import ProjectCard from "./ProjectCard"
+import { useQuery } from "@tanstack/react-query"
+import { getAllCourses } from "@/utils"
 
 const Courses = () => {
-  const Arr: string[] = Array(1).fill("")
+  const { data: courses, isLoading } = useQuery({
+    queryFn: getAllCourses,
+    queryKey: ["course"],
+  })
+
   return (
     <SimpleGrid
       spacing={4}
       templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
       className="my-4"
     >
-      {Arr.map((_, i) => (
-        <ProjectCard key={i} />
-      ))}
+      {courses &&
+        courses.courses.map((course, i) => (
+          <ProjectCard course={course} key={i} />
+        ))}
     </SimpleGrid>
   )
 }

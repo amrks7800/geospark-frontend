@@ -16,6 +16,7 @@ import {
 import {
   useMutation,
   useQuery,
+  useQueryClient,
 } from "@tanstack/react-query"
 import { useState } from "react"
 import { AiOutlinePlus } from "react-icons/ai"
@@ -31,11 +32,14 @@ function AddCourseModal() {
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
 
+  const queryClient = useQueryClient()
+
   const mutation = useMutation({
     mutationFn: addCourse,
     onSuccess() {
-      onClose()
+      queryClient.invalidateQueries(["course"])
       toast(`تم انشاء الكورس بنجاح`, { type: "success" })
+      onClose()
     },
   })
 

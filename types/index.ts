@@ -109,6 +109,11 @@ export interface UsersEndpointResponse {
 }
 
 export interface Course {
+  id?: string
   title: string
   description: string
+}
+
+export interface GetAllCoursesResponse {
+  courses: Course[]
 }

@@ -1,5 +1,6 @@
 "use client"
 
+import { Course } from "@/types"
 import {
   Button,
   Card,
@@ -8,18 +9,35 @@ import {
   CardHeader,
   Heading,
   Text,
+  useDisclosure,
 } from "@chakra-ui/react"
+import { BiTrash } from "react-icons/bi"
+import DeleteCourseModal from "./DeleteCourseModal"
 
-const ProjectCard = () => {
+const ProjectCard = ({ course }: { course: Course }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure()
   return (
-    <Card>
+    <Card className="relative group">
+      <BiTrash
+        color="red"
+        size={25}
+        className="cursor-pointer absolute top-4 left-2 hidden group-hover:block"
+        onClick={() => onOpen()}
+      />
+      <DeleteCourseModal
+        onClose={onClose}
+        onOpen={onOpen}
+        isOpen={isOpen}
+        courseName={course.title}
+        courseId={course.id!}
+      />
       <CardHeader>
         <Heading size="md" color={"#4E4FEB"}>
-          اساسيات الجيولوجيا
+          {course.title}
         </Heading>
       </CardHeader>
       <CardBody>
-        <Text>كورس تأسيسي في مادة الجيولوجيا</Text>
+        <Text>{course.description}</Text>
       </CardBody>
       <CardFooter>
         <Button variant={"outline"} color="#4E4FEB">

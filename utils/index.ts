@@ -7,6 +7,7 @@ import {
   ChangeUserActiveStateResponse,
   UsersEndpointResponse,
   Course,
+  GetAllCoursesResponse,
 } from "@/types"
 
 const api = "https://geospark.onrender.com"
@@ -62,9 +63,6 @@ export const getAllUsers =
   async (): Promise<UsersEndpointResponse> => {
     const apiHit = await fetch(`${api}/Allusers`, {
       credentials: "include",
-      next: {
-        revalidate: 10,
-      },
     })
 
     const response = await apiHit.json()
@@ -85,7 +83,21 @@ export const addCourse = async (newCourse: Course) => {
     credentials: "include",
     body: JSON.stringify(newCourse),
     headers: {
-      "Content-type": "application/json"
-    }
+      "Content-type": "application/json",
+    },
   })
+}
+
+export const getAllCourses =
+  async (): Promise<GetAllCoursesResponse> => {
+    return fetch(`${api}/courses`, {
+      credentials: "include",
+    }).then(resp => resp.json())
+  }
+
+export const deleteCourse = async (id: string) => {
+  return fetch(`${api}/courses/${id}`, {
+    method: "DELETE",
+    credentials: "include",
+  }).then(resp => resp.json())
 }
