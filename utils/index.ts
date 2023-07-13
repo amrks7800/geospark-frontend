@@ -24,7 +24,13 @@ export const SignIn = async (
     headers: {
       "Content-type": "application/json",
     },
-  }).then(data => data.json())
+  }).then(data => {
+    if (data.ok) return data.json()
+
+    return new Error(`${data.json()}`, {
+      cause: "Promise rejected",
+    })
+  })
 }
 
 export const signUp = async (

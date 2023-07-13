@@ -22,13 +22,13 @@ const ProjectCard = ({ course }: { course: Course }) => {
   const router = useRouter()
   const pathname = usePathname()
 
-  const { data, isLoading } = useQuery({
+  const { data } = useQuery({
     queryFn: getCurrentUser,
   })
 
   return (
     <Card className="relative group">
-      {!isLoading && data?.isAdmin && (
+      {data?.isAdmin && (
         <BiTrash
           color="red"
           size={25}
