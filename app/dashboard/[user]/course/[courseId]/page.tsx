@@ -7,28 +7,26 @@ import {
 } from "@/utils"
 
 type CourseProps = {
-  params: { courseId: string }
+  params: { courseId: string; user: string }
 }
 
 const Course = async ({
-  params: { courseId },
+  params: { courseId, user },
 }: CourseProps) => {
-  // const { chapters } = await getCourseChapters(courseId)
-  // const course = await getCourseById(courseId)
-  // const { isAdmin } = await getCurrentUser()
-  const [{ chapters }, course, { isAdmin }] =
-    await Promise.all([
-      getCourseChapters(courseId),
-      getCourseById(courseId),
-      getCurrentUser(),
-    ])
+  console.log(user)
+  const [{ chapters }, course] = await Promise.all([
+    getCourseChapters(courseId),
+    getCourseById(courseId),
+  ])
 
   return (
     <div className="p-4 flex-1">
       <h1 className="mb-5 text-2xl text-primary-blue">
         {course.title}
       </h1>
-      {isAdmin && <AddChapterModal courseId={courseId} />}
+      {user === "teachers" && (
+        <AddChapterModal courseId={courseId} />
+      )}
       <div>
         {chapters &&
           chapters.map((chapter, i) => (
