@@ -13,9 +13,15 @@ type CourseProps = {
 const Course = async ({
   params: { courseId },
 }: CourseProps) => {
-  const { chapters } = await getCourseChapters(courseId)
-  const course = await getCourseById(courseId)
-  const { isAdmin } = await getCurrentUser()
+  // const { chapters } = await getCourseChapters(courseId)
+  // const course = await getCourseById(courseId)
+  // const { isAdmin } = await getCurrentUser()
+  const [{ chapters }, course, { isAdmin }] =
+    await Promise.all([
+      getCourseChapters(courseId),
+      getCourseById(courseId),
+      getCurrentUser(),
+    ])
 
   return (
     <div className="p-4 flex-1">
