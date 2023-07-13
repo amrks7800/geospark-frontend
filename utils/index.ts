@@ -8,6 +8,8 @@ import {
   UsersEndpointResponse,
   Course,
   GetAllCoursesResponse,
+  GetCourseChaptersResponse,
+  Chapter,
 } from "@/types"
 
 const api = "https://geospark.onrender.com"
@@ -40,6 +42,7 @@ export const getCurrentUser =
   async (): Promise<CurrentUserResponse> => {
     return fetch(`${api}/currentuser`, {
       credentials: "include",
+      cache: "no-store",
     }).then(data => data.json())
   }
 
@@ -95,9 +98,46 @@ export const getAllCourses =
     }).then(resp => resp.json())
   }
 
+export const getCourseById = async (
+  id: string
+): Promise<Course> => {
+  return fetch(`${api}/courses/${id}`, {
+    credentials: "include",
+  }).then(resp => resp.json())
+}
+
 export const deleteCourse = async (id: string) => {
   return fetch(`${api}/courses/${id}`, {
     method: "DELETE",
     credentials: "include",
   }).then(resp => resp.json())
+}
+
+export const logOut = async () => {
+  return fetch(`${api}/logout`).then(resp => resp.json())
+}
+
+export const getCourseChapters = async (
+  id: string
+): Promise<GetCourseChaptersResponse> => {
+  return fetch(`${api}/courses/${id}/chapters`).then(resp =>
+    resp.json()
+  )
+}
+
+export const addChapter = async ({
+  newChapter,
+  courseId,
+}: {
+  newChapter: Chapter
+  courseId: string
+}) => {
+  return fetch(`${api}/courses/${courseId}/chapters`, {
+    method: "POST",
+    credentials: "include",
+    body: JSON.stringify(newChapter),
+    headers: {
+      "Content-type": "application/json",
+    },
+  })
 }

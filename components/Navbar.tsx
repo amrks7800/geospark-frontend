@@ -5,9 +5,9 @@ import Image from "next/image"
 import Button from "./Button"
 import { usePathname } from "next/navigation"
 import NavMenu from "./Menu"
-import { CgProfile } from "react-icons/cg"
 import { useQuery } from "@tanstack/react-query"
 import { getCurrentUser } from "@/utils"
+import { Avatar } from "@chakra-ui/react"
 
 const Navbar = () => {
   const pathname = usePathname()
@@ -74,9 +74,13 @@ const Navbar = () => {
           </>
         )}
 
-        {pathname.includes("dashboard") ? (
+        {pathname.includes("dashboard") &&
+        data?.firstName ? (
           <h1 className="text-xl font-bold text-primary-blue flex items-center gap-2">
-            <CgProfile size={30} />
+            <Avatar
+              name={`${data?.firstName} ${data?.lastName}`}
+            />
+
             {`${data?.firstName} ${data?.lastName}`}
           </h1>
         ) : (

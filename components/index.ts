@@ -15,6 +15,7 @@ import ProjectCard from "./ProjectCard"
 import Table from "./Table"
 import AddCourseModal from "./AddCourseModal"
 import Menu from "./Menu"
+import CourseChapter from "./CourseChapter"
 
 export {
   Providers,
@@ -34,4 +35,5 @@ export {
   Table,
   AddCourseModal,
   Menu,
+  CourseChapter,
 }

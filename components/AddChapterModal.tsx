@@ -1,6 +1,6 @@
 "use client"
 
-import { addCourse, getCurrentUser } from "@/utils"
+import { addChapter } from "@/utils"
 import {
   Button,
   Input,
@@ -13,28 +13,31 @@ import {
   Textarea,
   useDisclosure,
 } from "@chakra-ui/react"
-import {
-  useMutation,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query"
+import { useMutation } from "@tanstack/react-query"
+import { useRouter } from "next/navigation"
 import { useState } from "react"
 import { AiOutlinePlus } from "react-icons/ai"
 import { toast } from "react-toastify"
 
-function AddCourseModal() {
+type AddChapterModalProps = {
+  courseId: string
+}
+
+function AddChapterModal({
+  courseId,
+}: AddChapterModalProps) {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const [title, setTitle] = useState("")
   const [description, setDescription] = useState("")
 
-  const queryClient = useQueryClient()
+  const router = useRouter()
 
   const mutation = useMutation({
-    mutationFn: addCourse,
+    mutationFn: addChapter,
     onSuccess() {
-      queryClient.invalidateQueries(["course"])
-      toast(`تم انشاء الكورس بنجاح`, { type: "success" })
+      router.refresh()
+      toast(`تم انشاء الشابتر بنجاح`, { type: "success" })
       onClose()
     },
   })
@@ -46,7 +49,7 @@ function AddCourseModal() {
         onClick={onOpen}
       >
         <AiOutlinePlus size={30} />
-        إضافة كورس
+        إضافة شابتر
       </Button>
 
       <Modal
@@ -57,14 +60,14 @@ function AddCourseModal() {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader className="text-primary-blue">
-            أضف كورس جديد.
+            أضف شابتر جديد.
           </ModalHeader>
           <ModalBody pb={6}>
             <h2 className="text-slate-400 my-2">العنوان</h2>
             <Input
               type="text"
               variant={"filled"}
-              placeholder="ادخل عنوان الكورس"
+              placeholder="ادخل عنوان الشابتر"
               value={title}
               onChange={e => setTitle(e.target.value)}
             />
@@ -84,8 +87,11 @@ function AddCourseModal() {
               mr={3}
               onClick={() => {
                 mutation.mutate({
-                  title,
-                  description,
+                  newChapter: {
+                    title,
+                    description,
+                  },
+                  courseId,
                 })
               }}
             >
@@ -99,4 +105,4 @@ function AddCourseModal() {
   )
 }
 
-export default AddCourseModal
+export default AddChapterModal

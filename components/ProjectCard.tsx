@@ -13,9 +13,12 @@ import {
 } from "@chakra-ui/react"
 import { BiTrash } from "react-icons/bi"
 import DeleteCourseModal from "./DeleteCourseModal"
+import { usePathname, useRouter } from "next/navigation"
 
 const ProjectCard = ({ course }: { course: Course }) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const router = useRouter()
+  const pathname = usePathname()
   return (
     <Card className="relative group">
       <BiTrash
@@ -40,7 +43,13 @@ const ProjectCard = ({ course }: { course: Course }) => {
         <Text>{course.description}</Text>
       </CardBody>
       <CardFooter>
-        <Button variant={"outline"} color="#4E4FEB">
+        <Button
+          variant={"outline"}
+          color="#4E4FEB"
+          onClick={() =>
+            router.push(`${pathname}/course/${course.id}`)
+          }
+        >
           عرض
         </Button>
       </CardFooter>

@@ -4,27 +4,32 @@ import { AiOutlineMail } from "react-icons/ai"
 import { BiLockAlt } from "react-icons/bi"
 import { Link } from "@chakra-ui/next-js"
 import { Button } from "@chakra-ui/react"
-import { useMutation } from "@tanstack/react-query"
+import {
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query"
 import { useRouter } from "next/navigation"
 import ThemedInput from "./ThemedInput"
 import { SignIn } from "@/utils"
 import { toast } from "react-toastify"
 
 const SigninForm = () => {
+  const queryClient = useQueryClient()
   const router = useRouter()
 
   const mutation = useMutation({
     mutationFn: SignIn,
     onSuccess: data => {
-      toast("تم تسجيل الدخول بنجاح", { type: "success" })
+      queryClient.clear()
       if (data.data.user.isAdmin) {
         router.push("/dashboard/teachers")
       } else {
         router.push("/")
       }
+      toast("تم تسجيل الدخول بنجاح", { type: "success" })
     },
     onError(error: { message: string }) {
-      console.error(error)
+      console.log(error)
       toast(error.message, { type: "error" })
     },
   })

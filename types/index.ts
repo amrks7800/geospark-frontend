@@ -117,3 +117,14 @@ export interface Course {
 export interface GetAllCoursesResponse {
   courses: Course[]
 }
+
+export interface Chapter {
+  id?: string
+  title: string
+  description: string
+  courseId?: string
+}
+
+export interface GetCourseChaptersResponse {
+  chapters: Chapter[]
+}
