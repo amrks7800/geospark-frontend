@@ -14,80 +14,140 @@ import {
 
 const api = "https://geospark.onrender.com"
 
+const handleErrorMiddleware = (code: number) => {
+  if (typeof window !== "object") return
+
+  if (code === 403) {
+    if (location.pathname.includes("signin"))
+      throw new Error("الحساب ليس موجود")
+
+    if (!location.pathname.includes("signin"))
+      throw new Error("ليس لديك الصلاحية")
+  } else if (code === 401) {
+    if (!location.pathname.includes("signin"))
+      location.pathname = "/signin"
+
+    throw new Error("قم بتسجيل الدخول")
+  } else {
+    throw new Error("حدث خطا")
+  }
+}
+
 export const SignIn = async (
   data: SignInRequest
 ): Promise<AuthResponse> => {
-  return fetch(`${api}/login`, {
+  const request = await fetch(`${api}/login`, {
     method: "POST",
     body: JSON.stringify(data),
     credentials: "include",
     headers: {
       "Content-type": "application/json",
     },
-  }).then(data => {
-    if (data.ok) return data.json()
-
-    return new Error(`${data.json()}`, {
-      cause: "Promise rejected",
-    })
   })
+
+  if (!request.ok) {
+    handleErrorMiddleware(request.status)
+  }
+
+  const response = await request.json()
+
+  return response
 }
 
 export const signUp = async (
   formData: SignUpRequest
-): Promise<AuthResponse> =>
-  fetch(`${api}/signup`, {
+): Promise<AuthResponse> => {
+  const request = await fetch(`${api}/signup`, {
     method: "POST",
     body: JSON.stringify(formData),
     headers: {
       "Content-type": "application/json",
     },
-  }).then(data => data.json())
+  })
+
+  if (!request.ok) {
+    handleErrorMiddleware(request.status)
+  }
+
+  const response = await request.json()
+
+  return response
+}
 
 export const getCurrentUser =
   async (): Promise<CurrentUserResponse> => {
-    return fetch(`${api}/currentuser`, {
+    const request = await fetch(`${api}/currentuser`, {
       credentials: "include",
       cache: "no-store",
-    }).then(data => data.json())
+    })
+
+    if (!request.ok) {
+      handleErrorMiddleware(request.status)
+    }
+
+    const response = await request.json()
+
+    return response
   }
 
 export const changeUserActiveState = async ({
   id,
   activate,
 }: ChangeUserActiveStateRequest): Promise<ChangeUserActiveStateResponse> => {
+  let request
   if (activate)
-    return fetch(`${api}/activate/${id}`, {
+    request = await fetch(`${api}/activate/${id}`, {
       method: "PATCH",
       credentials: "include",
-    }).then(res => res.json())
+    })
 
-  return fetch(`${api}/deactivate/${id}`, {
-    method: "PATCH",
-    credentials: "include",
-  }).then(res => res.json())
+  if (!activate)
+    request = await fetch(`${api}/deactivate/${id}`, {
+      method: "PATCH",
+      credentials: "include",
+    })
+
+  if (!request?.ok) {
+    handleErrorMiddleware(request?.status!)
+  }
+
+  const response = await request?.json()
+
+  return response
 }
 
 export const getAllUsers =
   async (): Promise<UsersEndpointResponse> => {
-    const apiHit = await fetch(`${api}/Allusers`, {
+    const request = await fetch(`${api}/Allusers`, {
       credentials: "include",
     })
 
-    const response = await apiHit.json()
+    if (!request.ok) {
+      handleErrorMiddleware(request.status)
+    }
+
+    const response = await request.json()
 
     return response
   }
 
 export const deleteUser = async (id: string) => {
-  return fetch(`${api}/deleteUser/${id}`, {
+  const request = await fetch(`${api}/deleteUser/${id}`, {
     method: "DELETE",
     credentials: "include",
-  }).then(response => response.json())
+  })
+
+  if (!request.ok) {
+    handleErrorMiddleware(request.status)
+  }
+
+  const response = await request.json()
+
+  return response
 }
 
 export const addCourse = async (newCourse: Course) => {
-  return fetch(`${api}/courses`, {
+  const request = await fetch(`${api}/courses`, {
     method: "POST",
     credentials: "include",
     body: JSON.stringify(newCourse),
@@ -95,40 +155,91 @@ export const addCourse = async (newCourse: Course) => {
       "Content-type": "application/json",
     },
   })
+
+  if (!request.ok) {
+    handleErrorMiddleware(request.status)
+  }
+
+  const response = await request.json()
+
+  return response
 }
 
 export const getAllCourses =
   async (): Promise<GetAllCoursesResponse> => {
-    return fetch(`${api}/courses`, {
+    const request = await fetch(`${api}/courses`, {
       credentials: "include",
-    }).then(resp => resp.json())
+    })
+
+    if (!request.ok) {
+      handleErrorMiddleware(request.status)
+    }
+
+    const response = await request.json()
+
+    return response
   }
 
 export const getCourseById = async (
   id: string
 ): Promise<Course> => {
-  return fetch(`${api}/courses/${id}`, {
+  const request = await fetch(`${api}/courses/${id}`, {
     credentials: "include",
-  }).then(resp => resp.json())
+  })
+
+  if (!request.ok) {
+    handleErrorMiddleware(request.status)
+  }
+
+  const response = await request.json()
+
+  return response
 }
 
 export const deleteCourse = async (id: string) => {
-  return fetch(`${api}/courses/${id}`, {
+  const request = await fetch(`${api}/courses/${id}`, {
     method: "DELETE",
     credentials: "include",
-  }).then(resp => resp.json())
+  })
+
+  if (!request.ok) {
+    handleErrorMiddleware(request.status)
+  }
+
+  const response = await request.json()
+
+  return response
 }
 
 export const logOut = async () => {
-  return fetch(`${api}/logout`).then(resp => resp.json())
+  const request = await fetch(`${api}/logout`)
+
+  if (!request.ok) {
+    handleErrorMiddleware(request.status)
+  }
+
+  const response = await request.json()
+
+  return response
 }
 
 export const getCourseChapters = async (
   id: string
 ): Promise<GetCourseChaptersResponse> => {
-  return fetch(`${api}/courses/${id}/chapters`).then(resp =>
-    resp.json()
+  const request = await fetch(
+    `${api}/courses/${id}/chapters`,
+    {
+      cache: "no-store",
+    }
   )
+
+  if (!request.ok) {
+    handleErrorMiddleware(request.status)
+  }
+
+  const response = await request.json()
+
+  return response
 }
 
 export const addChapter = async ({
@@ -138,12 +249,39 @@ export const addChapter = async ({
   newChapter: Chapter
   courseId: string
 }) => {
-  return fetch(`${api}/courses/${courseId}/chapters`, {
-    method: "POST",
+  const request = await fetch(
+    `${api}/courses/${courseId}/chapters`,
+    {
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify(newChapter),
+      cache: "no-store",
+      headers: {
+        "Content-type": "application/json",
+      },
+    }
+  )
+
+  if (!request.ok) {
+    handleErrorMiddleware(request.status)
+  }
+
+  const response = await request.json()
+
+  return response
+}
+
+export const deleteChapter = async (id: string) => {
+  const request = await fetch(`${api}/chapters/${id}`, {
+    method: "DELETE",
     credentials: "include",
-    body: JSON.stringify(newChapter),
-    headers: {
-      "Content-type": "application/json",
-    },
   })
+
+  if (!request.ok) {
+    handleErrorMiddleware(request.status)
+  }
+
+  const response = await request.json()
+
+  return response
 }

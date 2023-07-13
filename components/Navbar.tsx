@@ -76,12 +76,12 @@ const Navbar = () => {
 
         {pathname.includes("dashboard") &&
         data?.firstName ? (
-          <h1 className="text-xl font-bold text-primary-blue flex items-center gap-2">
+          <h1 className="text-xl font-bold text-primary-blue flex items-center gap-2 me-2">
             <Avatar
               name={`${data?.firstName} ${data?.lastName}`}
             />
 
-            {`${data?.firstName} ${data?.lastName}`}
+            <span className="sm:block hidden">{`${data?.firstName} ${data?.lastName}`}</span>
           </h1>
         ) : (
           ""

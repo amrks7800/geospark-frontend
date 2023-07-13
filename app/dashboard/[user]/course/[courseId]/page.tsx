@@ -1,10 +1,6 @@
 import { CourseChapter } from "@/components"
 import AddChapterModal from "@/components/AddChapterModal"
-import {
-  getCourseById,
-  getCourseChapters,
-  getCurrentUser,
-} from "@/utils"
+import { getCourseById, getCourseChapters } from "@/utils"
 
 type CourseProps = {
   params: { courseId: string; user: string }
@@ -13,7 +9,6 @@ type CourseProps = {
 const Course = async ({
   params: { courseId, user },
 }: CourseProps) => {
-  console.log(user)
   const [{ chapters }, course] = await Promise.all([
     getCourseChapters(courseId),
     getCourseById(courseId),

@@ -24,11 +24,12 @@ const ProjectCard = ({ course }: { course: Course }) => {
 
   const { data } = useQuery({
     queryFn: getCurrentUser,
+    queryKey: [""],
   })
 
   return (
     <Card className="relative group">
-      {data?.isAdmin && (
+      {!!data?.isAdmin && (
         <BiTrash
           color="red"
           size={25}
