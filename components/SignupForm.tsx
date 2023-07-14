@@ -22,12 +22,10 @@ const SignupForm = () => {
     mutationFn: signUp,
     onSuccess: response => {
       toast("تم تسجيل الدخول بنجاح", { type: "success" })
+
       queryClient.clear()
-      if (response.data.user.isAdmin) {
-        router.push("/dashboard/teachers")
-      } else {
-        router.push("/")
-      }
+
+      router.push("/signin")
     },
     onError(error) {},
   })
