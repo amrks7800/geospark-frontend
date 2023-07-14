@@ -6,10 +6,8 @@ import {
   teachersNavLink,
 } from "@/constants"
 import DashboardLink from "./DashboardLink"
-import SidebarSwitch from "./SidebarSwitch"
 import { FaChalkboardTeacher } from "react-icons/fa"
 import { PiStudentFill } from "react-icons/pi"
-import { SidebarSwitchProps } from "@/types"
 import { useSidebarStore } from "@/store"
 import LogOutLink from "./LogOutLink"
 
@@ -30,7 +28,7 @@ const DashboardSidebar = () => {
       className={`bg-[#fcfbfb] shadow-xl basis-[240px]
       w-60 md:static md:translate-x-0 absolute z-10 ${
         isOpen ? "translate-x-0" : "translate-x-[240px]"
-      } h-screen transition-transform duration-300
+      } h-[88vh] transition-transform duration-300
       flex flex-col overflow-scroll hide-scroll-bars
       `}
     >
