@@ -21,7 +21,7 @@ const SignupForm = () => {
   const mutation = useMutation({
     mutationFn: signUp,
     onSuccess: response => {
-      toast("تم تسجيل الدخول بنجاح", { type: "success" })
+      toast("يمكنك تسجيل الدخول الأن", { type: "success" })
 
       queryClient.clear()
 

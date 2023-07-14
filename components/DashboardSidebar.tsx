@@ -11,6 +11,7 @@ import { FaChalkboardTeacher } from "react-icons/fa"
 import { PiStudentFill } from "react-icons/pi"
 import { SidebarSwitchProps } from "@/types"
 import { useSidebarStore } from "@/store"
+import LogOutLink from "./LogOutLink"
 
 const DashboardSidebar = () => {
   const [navLinks, setNavLinks] = useState({
@@ -33,7 +34,7 @@ const DashboardSidebar = () => {
       flex flex-col overflow-scroll hide-scroll-bars
       `}
     >
-      <div className=" h-screen">
+      <div className="relative h-screen">
         {pathname.includes("users")
           ? navLinks.studentsNavLink.links.map(
               (link, i) => (
@@ -75,6 +76,7 @@ const DashboardSidebar = () => {
               )
             )
           : null}
+        <LogOutLink />
       </div>
     </div>
   )
