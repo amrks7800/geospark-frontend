@@ -15,18 +15,20 @@ const Course = async ({
   ])
 
   return (
-    <div className="p-4 flex-1">
-      <h1 className="mb-5 text-2xl text-primary-blue">
-        {course.title}
-      </h1>
-      {user === "teachers" && (
-        <AddChapterModal courseId={courseId} />
-      )}
+    <div className="p-4 flex-1 overflow-y-scroll h-screen">
       <div>
-        {chapters &&
-          chapters.map((chapter, i) => (
-            <CourseChapter chapter={chapter} key={i} />
-          ))}
+        <h1 className="mb-5 text-2xl text-primary-blue">
+          {course.title}
+        </h1>
+        {user === "teachers" && (
+          <AddChapterModal courseId={courseId} />
+        )}
+        <div>
+          {chapters &&
+            chapters.map((chapter, i) => (
+              <CourseChapter chapter={chapter} key={i} />
+            ))}
+        </div>
       </div>
     </div>
   )

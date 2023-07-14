@@ -1,22 +1,30 @@
-import { SidebarSwitchProps } from "@/types"
-import { FaAngleLeft, FaAngleRight } from "react-icons/fa"
+"use client"
 
-const SidebarSwitch = ({
-  isOpen,
-  setIsOpen,
-}: SidebarSwitchProps) => {
-  return (
-    <div
-      className="md:hidden absolute top-1/2 -translate-y-1/2 w-14 h-14 rounded-full border-2 border-solid border-primary-blue
-    flex items-center justify-end bg-white right-[85%] -z-10 cursor-pointer"
-      onClick={() => setIsOpen(prev => !prev)}
-    >
-      {isOpen ? (
-        <FaAngleRight size={20} color={"#4E4FEB"} />
-      ) : (
-        <FaAngleLeft size={20} color={"#4E4FEB"} />
-      )}
-    </div>
+import { useSidebarStore } from "@/store"
+import { FaAngleLeft, FaAngleRight } from "react-icons/fa"
+import { usePathname } from "next/navigation"
+
+const SidebarSwitch = () => {
+  const isOpen = useSidebarStore(state => state.isOpen)
+  const setIsOpen = useSidebarStore(
+    state => state.setIsOpen
   )
+  const pathname = usePathname()
+
+  if (pathname.includes("dashboard")) {
+    return (
+      <div
+        className="md:hidden w-12 h-12 rounded-full border-2 border-solid border-primary-blue
+      flex items-center justify-center bg-white right-[85%] cursor-pointer"
+        onClick={() => setIsOpen()}
+      >
+        {isOpen ? (
+          <FaAngleRight size={20} color={"#4E4FEB"} />
+        ) : (
+          <FaAngleLeft size={20} color={"#4E4FEB"} />
+        )}
+      </div>
+    )
+  }
 }
 export default SidebarSwitch

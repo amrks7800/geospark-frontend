@@ -9,6 +9,8 @@ import DashboardLink from "./DashboardLink"
 import SidebarSwitch from "./SidebarSwitch"
 import { FaChalkboardTeacher } from "react-icons/fa"
 import { PiStudentFill } from "react-icons/pi"
+import { SidebarSwitchProps } from "@/types"
+import { useSidebarStore } from "@/store"
 
 const DashboardSidebar = () => {
   const [navLinks, setNavLinks] = useState({
@@ -16,7 +18,10 @@ const DashboardSidebar = () => {
     studentsNavLink,
   })
 
-  const [isOpen, setIsOpen] = useState(false)
+  const isOpen = useSidebarStore(state => state.isOpen)
+  const setIsOpen = useSidebarStore(
+    state => state.setIsOpen
+  )
 
   const pathname = usePathname()
   return (
@@ -25,14 +30,10 @@ const DashboardSidebar = () => {
       w-60 md:static md:translate-x-0 absolute z-10 ${
         isOpen ? "translate-x-0" : "translate-x-[240px]"
       } h-screen transition-transform duration-300
-      flex flex-col 
+      flex flex-col overflow-scroll hide-scroll-bars
       `}
     >
-      <div className="h-full relative">
-        <SidebarSwitch
-          isOpen={isOpen}
-          setIsOpen={setIsOpen}
-        />
+      <div className=" h-screen">
         {pathname.includes("users")
           ? navLinks.studentsNavLink.links.map(
               (link, i) => (

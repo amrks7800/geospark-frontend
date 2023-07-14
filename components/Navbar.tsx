@@ -8,6 +8,7 @@ import NavMenu from "./Menu"
 import { useQuery } from "@tanstack/react-query"
 import { getCurrentUser } from "@/utils"
 import { Avatar } from "@chakra-ui/react"
+import SidebarSwitch from "./SidebarSwitch"
 
 const Navbar = () => {
   const pathname = usePathname()
@@ -20,20 +21,23 @@ const Navbar = () => {
   return (
     <header className="shadow-sm bg-[#FCFBFB]">
       <div className="container mx-auto flex items-center justify-between py-3">
-        <Link
-          href={"/"}
-          className="flex items-center justify-center gap-2"
-        >
-          <Image
-            src="/logo.png"
-            alt="logo"
-            width={50}
-            height={50}
-          />
-          <h1 className="text-primary-blue text-2xl font-bold tracking-wider sm:block hidden">
-            GeoSpark
-          </h1>
-        </Link>
+        <div className="flex items-center gap-2">
+          <SidebarSwitch />
+          <Link
+            href={"/"}
+            className="flex items-center justify-center gap-2"
+          >
+            <Image
+              src="/logo.png"
+              alt="logo"
+              width={50}
+              height={50}
+            />
+            <h1 className="text-primary-blue text-2xl font-bold tracking-wider sm:block hidden">
+              GeoSpark
+            </h1>
+          </Link>
+        </div>
 
         {pathname === "/signup" ||
         pathname === "/signin" ||

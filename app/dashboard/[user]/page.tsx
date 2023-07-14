@@ -14,7 +14,7 @@ export async function generateMetadata({
 
 const Dashboard = ({ params }: DashboardParams) => {
   return (
-    <div className="flex-1 p-4">
+    <div className="flex-1 p-4 h-screen overflow-y-scroll">
       {params.user === "teachers" && <AddCourseModal />}
       <Courses />
     </div>
