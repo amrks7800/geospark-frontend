@@ -57,6 +57,10 @@ export const SignIn = async (
 export const signUp = async (
   formData: SignUpRequest
 ): Promise<AuthResponse> => {
+  const logout = await logOut()
+
+  console.log(logout)
+
   const request = await fetch(`${api}/signup`, {
     method: "POST",
     body: JSON.stringify(formData),

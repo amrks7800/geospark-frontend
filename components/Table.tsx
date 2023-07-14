@@ -87,9 +87,7 @@ const Tr = ({ user }: { user: User }) => {
         type: "success",
       })
     },
-    onError: err => {
-      console.log(err)
-    },
+    onError: err => {},
   })
 
   useEffect(() => {

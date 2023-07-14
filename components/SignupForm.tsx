@@ -29,9 +29,7 @@ const SignupForm = () => {
         router.push("/")
       }
     },
-    onError(error) {
-      console.log(error)
-    },
+    onError(error) {},
   })
 
   const handleSignup = (

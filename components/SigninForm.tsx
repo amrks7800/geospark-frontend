@@ -20,7 +20,6 @@ const SigninForm = () => {
   const mutation = useMutation({
     mutationFn: SignIn,
     onSuccess: data => {
-      console.log(data)
       queryClient.clear()
       if (data.data.user.isAdmin) {
         router.push("/dashboard/teachers")
@@ -30,7 +29,6 @@ const SigninForm = () => {
       toast("تم تسجيل الدخول بنجاح", { type: "success" })
     },
     onError(error: { message: string }) {
-      console.log(error, error.message)
       toast(error.message, { type: "error" })
     },
   })
