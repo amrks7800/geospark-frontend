@@ -16,6 +16,7 @@ import Table from "./Table"
 import AddCourseModal from "./AddCourseModal"
 import Menu from "./Menu"
 import CourseChapter from "./CourseChapter"
+import Skills from "./Skills"
 
 export {
   Providers,
@@ -36,4 +37,5 @@ export {
   AddCourseModal,
   Menu,
   CourseChapter,
+  Skills,
 }

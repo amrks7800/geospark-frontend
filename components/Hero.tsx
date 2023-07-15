@@ -26,7 +26,7 @@ const Hero = () => {
         />
       </div>
       <Link
-        href={{}}
+        href={"/#skills"}
         className="flex flex-col justify-center items-center absolute bottom-10 right-1/2 translate-x-1/2 up-down"
       >
         <Image

@@ -1,4 +1,8 @@
-import { Dispatch, SetStateAction, ReactNode } from "react"
+import React, {
+  Dispatch,
+  SetStateAction,
+  ReactNode,
+} from "react"
 
 export interface User {
   firstName: string
@@ -14,6 +18,7 @@ export interface ButtonProps {
   text: string
   type?: "button" | "submit"
   style?: string
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 export interface ThemedInputProps {
@@ -127,4 +132,10 @@ export interface Chapter {
 
 export interface GetCourseChaptersResponse {
   chapters: Chapter[]
+}
+
+export interface SkillProps {
+  title: string
+  text: string
+  icon: ReactNode
 }

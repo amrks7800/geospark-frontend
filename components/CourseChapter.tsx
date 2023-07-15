@@ -10,7 +10,7 @@ import {
 import { deleteChapter, getCurrentUser } from "@/utils"
 import { BiTrash } from "react-icons/bi"
 import { toast } from "react-toastify"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 
 type CourseChapterProps = {
   chapter: Chapter
@@ -18,6 +18,7 @@ type CourseChapterProps = {
 
 const CourseChapter = ({ chapter }: CourseChapterProps) => {
   const PROGRESS_VALUE = Math.floor(Math.random() * 100)
+  const pathname = usePathname()
 
   const { data } = useQuery({
     queryFn: getCurrentUser,
@@ -61,6 +62,9 @@ const CourseChapter = ({ chapter }: CourseChapterProps) => {
         <Button
           text={!!data?.isAdmin ? "تعديل" : "متابعة"}
           style="me-8 block sm:mb-0 mb-3"
+          onClick={() =>
+            router.push(`${pathname}/chapter/${chapter.id}`)
+          }
         />
       </div>
       {!data?.isAdmin && (

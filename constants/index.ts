@@ -30,11 +30,20 @@ export const teachersNavLink = {
   activeIdx: 1,
 }
 
-// export const teacherIcons = [
-//   <FaChalkboardTeacher size={25} />,
-//   <PiStudentFill size={25} />,
-// ]
-
-// export const studentsIcons = [
-//   <FaChalkboardTeacher size={25} />,
-// ]
+export const skillsContent = [
+  {
+    id: 1,
+    title: "تعليم تفاعلي",
+    text: "أحصل علي تجربة تعليمية فريدة و تقييمية.",
+  },
+  {
+    id: 2,
+    title: "إختبارات دائمة",
+    text: "أسئلة متعددة و  متنوعة تقيس مدي فهم الطالب",
+  },
+  {
+    id: 3,
+    title: "مراقبة مستمرة",
+    text: "يتم تقييمك بشكل مستمر من خلال مدرس المادة",
+  },
+]
