@@ -30,7 +30,7 @@ export function StepCounter({
   })
 
   return (
-    <Stepper index={activeStep}>
+    <Stepper index={activeIdx}>
       {steps.map((step, index) => (
         <Step key={index}>
           <StepIndicator>
