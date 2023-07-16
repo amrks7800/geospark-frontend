@@ -57,25 +57,27 @@ const Page = ({ params }: PageProps) => {
       return (
         <div className="p-4 flex-1 h-[88vh] overflow-y-scroll">
           <div className="max-sm:overflow-x-scroll max-sm:w-[85vw] max-sm:mx-auto">
-            <div className="w-fit">
-              <StepCounter
-                steps={data.videos}
-                activeIdx={active}
-              />
-            </div>
-            <VideoPlayer video={data.videos[active - 1]} />
-            <div className="w-[450px] flex items-center justify-between">
-              <Button
-                onClick={() => setActive(prev => prev - 1)}
-              >
-                السابق
-              </Button>
-              <Button
-                onClick={() => setActive(prev => prev + 1)}
-              >
-                التالي
-              </Button>
-            </div>
+            <StepCounter
+              steps={data.videos}
+              activeIdx={active}
+            />
+          </div>
+          <VideoPlayer video={data.videos[active - 1]} />
+          <div className="w-[560px] my-3 flex items-center justify-between">
+            <Button
+              onClick={() => setActive(prev => prev - 1)}
+              variant={"outline"}
+              disabled={active === 1}
+            >
+              السابق
+            </Button>
+            <Button
+              onClick={() => setActive(prev => prev + 1)}
+              variant={"outline"}
+              disabled={active === data.videos.length}
+            >
+              التالي
+            </Button>
           </div>
         </div>
       )

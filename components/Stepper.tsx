@@ -14,6 +14,7 @@ import {
   Stepper,
   useSteps,
 } from "@chakra-ui/react"
+import { useEffect } from "react"
 
 type StepProps = {
   steps: Video[]
@@ -24,13 +25,17 @@ export function StepCounter({
   steps,
   activeIdx,
 }: StepProps) {
-  const { activeStep } = useSteps({
+  const { activeStep, setActiveStep } = useSteps({
     index: activeIdx,
     count: steps.length,
   })
 
+  useEffect(() => {
+    setActiveStep(activeIdx)
+  }, [activeIdx])
+
   return (
-    <Stepper index={activeIdx}>
+    <Stepper index={activeStep}>
       {steps.map((step, index) => (
         <Step key={index}>
           <StepIndicator>
