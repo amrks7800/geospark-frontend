@@ -77,7 +77,7 @@ const Page = ({ params }: PageProps) => {
           <div className="max-w-[560px] my-3 flex items-center justify-between mx-auto">
             <Button
               onClick={() => {
-                if (active === data.videos.length) return
+                if (active === 1) return
                 setActive(prev => prev - 1)
               }}
               variant={"outline"}
