@@ -64,7 +64,8 @@ export interface SidebarSwitchProps {
 
 export interface TableProps {
   headers: string[]
-  users?: User[]
+  items?: (User | Video)[]
+  type: "users" | "videos"
 }
 
 export interface CellProps {
@@ -138,4 +139,14 @@ export interface SkillProps {
   title: string
   text: string
   icon: ReactNode
+}
+
+export interface Video {
+  url: string
+  title: string
+  id?: string
+}
+
+export type AddVideoProps = Video & {
+  chapterId: string
 }

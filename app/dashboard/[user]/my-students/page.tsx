@@ -22,7 +22,8 @@ export default function Page() {
                 "البريد الالكتروني",
                 "الحالة",
               ]}
-              users={data?.users}
+              items={data?.users}
+              type="users"
             />
           </div>
         </div>

@@ -1,16 +1,20 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { CellProps, TableProps, User } from "@/types"
+import { CellProps, TableProps, User, Video } from "@/types"
 import {
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query"
-import { changeUserActiveState, deleteUser } from "@/utils"
+import {
+  changeUserActiveState,
+  deleteUser,
+  deleteVideoById,
+} from "@/utils"
 import { BiTrash } from "react-icons/bi"
 import { toast } from "react-toastify"
 
-const Table = ({ headers, users }: TableProps) => {
+const Table = ({ headers, items, type }: TableProps) => {
   return (
     <table className="border border-primary-blue border-spacing-0 me-6 mb-10">
       <thead>
@@ -18,18 +22,28 @@ const Table = ({ headers, users }: TableProps) => {
           {headers.map((label, i) => (
             <HeadCell key={i}>{label}</HeadCell>
           ))}
-          <HeadCell>
-            <div className="flex items-center justify-between">
-              <p className="text-primary-blue">تنشيط</p>
+          {type === "users" ? (
+            <HeadCell>
+              <div className="flex items-center justify-between">
+                <p className="text-primary-blue">تنشيط</p>
+                <p className="text-red-600">حذف</p>
+              </div>
+            </HeadCell>
+          ) : (
+            <HeadCell>
               <p className="text-red-600">حذف</p>
-            </div>
-          </HeadCell>
+            </HeadCell>
+          )}
         </tr>
       </thead>
       <tbody>
-        {users?.map(user => (
-          <Tr user={user} key={user.id} />
-        ))}
+        {type === "users"
+          ? items?.map(item => (
+              <UserTr user={item} key={item.id} />
+            ))
+          : items?.map(item => (
+              <VideoTr video={item} key={item.id} />
+            ))}
       </tbody>
     </table>
   )
@@ -58,7 +72,7 @@ const BodyCell = ({ children, isEmpty }: CellProps) => {
   )
 }
 
-const Tr = ({ user }: { user: User }) => {
+const UserTr = ({ user }: { user: any }) => {
   const [checked, setChecked] = useState(!!user.subscribed)
   const queryClient = useQueryClient()
 
@@ -110,12 +124,52 @@ const Tr = ({ user }: { user: User }) => {
             className="w-5 aspect-square accent-secondary-blue"
             checked={checked}
             onClick={() => setChecked(prev => !prev)}
+            onChange={() => {}}
           />
           <BiTrash
             color="red"
             size={25}
             className="cursor-pointer"
             onClick={() => deleteMutation.mutate(user?.id!)}
+          />
+        </div>
+      </BodyCell>
+    </tr>
+  )
+}
+
+const VideoTr = ({ video }: { video: any }) => {
+  const queryClient = useQueryClient()
+
+  const deleteMutation = useMutation({
+    mutationFn: deleteVideoById,
+    onSuccess() {
+      toast("تم الحذف", { type: "success" })
+      queryClient.invalidateQueries(["video"])
+    },
+  })
+  return (
+    <tr>
+      <BodyCell>{video.title}</BodyCell>
+      <BodyCell>
+        <a
+          href={video.url.replace("embed", "watch")}
+          className="text-primary-blue text-xl no-underline hover:underline"
+        >
+          شاهد
+        </a>
+      </BodyCell>
+      <BodyCell isEmpty>
+        <div className="flex justify-between items-center">
+          <BiTrash
+            color="red"
+            size={25}
+            className="cursor-pointer"
+            onClick={() => {
+              if (video.id) {
+                deleteMutation.mutate(video?.id)
+              }
+            }}
           />
         </div>
       </BodyCell>

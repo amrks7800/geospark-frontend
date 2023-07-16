@@ -10,7 +10,10 @@ import {
   GetAllCoursesResponse,
   GetCourseChaptersResponse,
   Chapter,
+  Video,
+  AddVideoProps,
 } from "@/types"
+import { toast } from "react-toastify"
 
 const api = "https://geospark.onrender.com"
 
@@ -24,8 +27,10 @@ const handleErrorMiddleware = (code: number) => {
     if (!location.pathname.includes("signin"))
       throw new Error("ليس لديك الصلاحية")
   } else if (code === 401) {
-    if (!location.pathname.includes("signin"))
+    if (!location.pathname.includes("signin")) {
       location.pathname = "/signin"
+      toast("يجب تسجيل الدخول من جديد", { type: "error" })
+    }
 
     throw new Error("قم بتسجيل الدخول")
   } else {
@@ -281,6 +286,63 @@ export const deleteChapter = async (id: string) => {
     method: "DELETE",
     credentials: "include",
   })
+
+  if (!request.ok) {
+    handleErrorMiddleware(request.status)
+  }
+
+  const response = await request.json()
+
+  return response
+}
+
+export const getChapterVideos = async (
+  chapterId: string
+): Promise<{ videos: Video[] }> => {
+  const request = await fetch(
+    `${api}/chapters/${chapterId}/videos`,
+    {
+      cache: "no-store",
+      credentials: "include",
+    }
+  )
+
+  if (!request.ok) {
+    handleErrorMiddleware(request.status)
+  }
+
+  const response = await request.json()
+
+  return response
+}
+
+export const deleteVideoById = async (videoId: string) => {
+  const request = await fetch(`${api}/videos/${videoId}`, {
+    method: "DELETE",
+    credentials: "include",
+  })
+
+  if (!request.ok) {
+    handleErrorMiddleware(request.status)
+  }
+
+  const response = await request.json()
+
+  return response
+}
+
+export const addVideo = async (newVideo: AddVideoProps) => {
+  const request = await fetch(
+    `${api}/chapters/${newVideo.chapterId}/videos`,
+    {
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify(newVideo),
+      headers: {
+        "Content-type": "application/json",
+      },
+    }
+  )
 
   if (!request.ok) {
     handleErrorMiddleware(request.status)

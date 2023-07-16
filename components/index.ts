@@ -17,6 +17,9 @@ import AddCourseModal from "./AddCourseModal"
 import Menu from "./Menu"
 import CourseChapter from "./CourseChapter"
 import Skills from "./Skills"
+import AddVideoModal from "./AddVideoModal"
+import { StepCounter } from "./Stepper"
+import VideoPlayer from "./VideoPlayer"
 
 export {
   Providers,
@@ -38,4 +41,7 @@ export {
   Menu,
   CourseChapter,
   Skills,
+  AddVideoModal,
+  StepCounter,
+  VideoPlayer,
 }

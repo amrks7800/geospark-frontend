@@ -1,6 +1,6 @@
 "use client"
 
-import { addCourse } from "@/utils"
+import { addVideo } from "@/utils"
 import {
   Button,
   Input,
@@ -22,19 +22,23 @@ import { useState } from "react"
 import { AiOutlinePlus } from "react-icons/ai"
 import { toast } from "react-toastify"
 
-function AddCourseModal() {
+function AddVideoModal({
+  chapterId,
+}: {
+  chapterId: string
+}) {
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const [title, setTitle] = useState("")
-  const [description, setDescription] = useState("")
+  const [url, setUrl] = useState("")
 
   const queryClient = useQueryClient()
 
   const mutation = useMutation({
-    mutationFn: addCourse,
+    mutationFn: addVideo,
     onSuccess() {
-      queryClient.invalidateQueries(["course"])
-      toast(`تم انشاء الكورس بنجاح`, { type: "success" })
+      queryClient.invalidateQueries(["video"])
+      toast(`تم انشاء الفيديو بنجاح`, { type: "success" })
       onClose()
     },
   })
@@ -42,11 +46,11 @@ function AddCourseModal() {
   return (
     <>
       <Button
-        className="bg-primary-blue rounded-md text-white flex items-center gap-2 w-fit px-4 py-2 font-semibold"
+        className="bg-primary-blue rounded-md text-white flex items-center gap-2 w-fit px-4 py-2 font-semibold my-3"
         onClick={onOpen}
       >
         <AiOutlinePlus size={30} />
-        إضافة كورس
+        إضافة فيديو
       </Button>
 
       <Modal
@@ -57,24 +61,24 @@ function AddCourseModal() {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader className="text-primary-blue">
-            أضف كورس جديد.
+            أضف فيديو جديد.
           </ModalHeader>
           <ModalBody pb={6}>
             <h2 className="text-slate-400 my-2">العنوان</h2>
             <Input
               type="text"
               variant={"filled"}
-              placeholder="ادخل عنوان الكورس"
+              placeholder="ادخل عنوان الفيديو"
               value={title}
               onChange={e => setTitle(e.target.value)}
             />
-            <h2 className="text-slate-400 my-2">الوصف</h2>
+            <h2 className="text-slate-400 my-2">الرابط</h2>
             <Textarea
               variant={"filled"}
-              placeholder="أدخل الوصف"
+              placeholder="أدخل الرابط"
               resize={"none"}
-              value={description}
-              onChange={e => setDescription(e.target.value)}
+              value={url}
+              onChange={e => setUrl(e.target.value)}
             ></Textarea>
           </ModalBody>
 
@@ -85,7 +89,8 @@ function AddCourseModal() {
               onClick={() => {
                 mutation.mutate({
                   title,
-                  description,
+                  url,
+                  chapterId,
                 })
               }}
             >
@@ -99,4 +104,4 @@ function AddCourseModal() {
   )
 }
 
-export default AddCourseModal
+export default AddVideoModal

@@ -16,6 +16,10 @@ const Navbar = () => {
   const { data } = useQuery({
     queryFn: getCurrentUser,
     queryKey: [""],
+    retry(failureCount) {
+      if (failureCount === 3) return false
+      return true
+    },
   })
 
   return (
