@@ -47,7 +47,9 @@ export function StepCounter({
           </StepIndicator>
 
           <Box flexShrink="0">
-            <StepTitle>{step.title}</StepTitle>
+            <StepTitle>
+              {step.title.split(" ")[0]}
+            </StepTitle>
           </Box>
 
           <StepSeparator />

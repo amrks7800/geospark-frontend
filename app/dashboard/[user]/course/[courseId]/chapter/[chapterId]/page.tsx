@@ -63,7 +63,7 @@ const Page = ({ params }: PageProps) => {
             />
           </div>
           <VideoPlayer video={data.videos[active - 1]} />
-          <div className="w-[560px] my-3 flex items-center justify-between">
+          <div className="max-w-[560px] mx-2 my-3 flex items-center justify-between">
             <Button
               onClick={() => setActive(prev => prev - 1)}
               variant={"outline"}
