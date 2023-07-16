@@ -9,7 +9,11 @@ import {
 import { getChapterVideos } from "@/utils"
 import { Button } from "@chakra-ui/react"
 import { useQuery } from "@tanstack/react-query"
-import { usePathname, useRouter } from "next/navigation"
+import {
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation"
 import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 
@@ -28,10 +32,17 @@ const Page = ({ params }: PageProps) => {
   })
 
   const pathname = usePathname()
+  const searchParams = useSearchParams()
 
   useEffect(() => {
     router.push(`${pathname}?v=${active}`)
   }, [active])
+
+  useEffect(() => {
+    if (searchParams.get("v")) {
+      setActive(+searchParams.get("v")!)
+    }
+  }, [])
 
   if (isError) {
     toast("انت غير مشترك او حدث خطأ", { type: "error" })
@@ -65,16 +76,20 @@ const Page = ({ params }: PageProps) => {
           <VideoPlayer video={data.videos[active - 1]} />
           <div className="max-w-[560px] mx-2 my-3 flex items-center justify-between">
             <Button
-              onClick={() => setActive(prev => prev - 1)}
+              onClick={() => {
+                if (active === data.videos.length) return
+                setActive(prev => prev - 1)
+              }}
               variant={"outline"}
-              disabled={active === 1}
             >
               السابق
             </Button>
             <Button
-              onClick={() => setActive(prev => prev + 1)}
+              onClick={() => {
+                if (active === data.videos.length) return
+                setActive(prev => prev + 1)
+              }}
               variant={"outline"}
-              disabled={active === data.videos.length}
             >
               التالي
             </Button>
