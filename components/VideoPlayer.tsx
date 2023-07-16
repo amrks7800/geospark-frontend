@@ -12,7 +12,7 @@ const VideoPlayer = ({ video }: { video: Video }) => {
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         allowFullScreen
-        className="block mx-auto sm:w-[560] w-[94vw]"
+        className="block mx-auto sm:w-[560px] w-[94vw]"
       ></iframe>
     </>
   )
