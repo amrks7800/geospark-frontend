@@ -42,7 +42,7 @@ const Page = ({ params }: PageProps) => {
     if (searchParams.get("v")) {
       setActive(+searchParams.get("v")!)
     }
-  }, [])
+  }, [pathname])
 
   if (isError) {
     toast("انت غير مشترك او حدث خطأ", { type: "error" })
@@ -74,7 +74,7 @@ const Page = ({ params }: PageProps) => {
             />
           </div>
           <VideoPlayer video={data.videos[active - 1]} />
-          <div className="max-w-[560px] mx-2 my-3 flex items-center justify-between">
+          <div className="max-w-[560px] my-3 flex items-center justify-between mx-auto">
             <Button
               onClick={() => {
                 if (active === data.videos.length) return
