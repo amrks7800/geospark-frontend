@@ -1,28 +1,7 @@
-import { FaAccessibleIcon } from "react-icons/fa"
-import { VscVmActive } from "react-icons/vsc"
-import { BiBadgeCheck } from "react-icons/bi"
-import { FaMicroscope } from "react-icons/fa"
 import { SkillProps } from "@/types"
 import { skillsContent } from "@/constants"
 import Image from "next/image"
-
-const skillsIcon = [
-  <VscVmActive
-    size={55}
-    className="mx-auto"
-    color={"#4E4FEB"}
-  />,
-  <BiBadgeCheck
-    size={55}
-    className="mx-auto"
-    color={"#4E4FEB"}
-  />,
-  <FaMicroscope
-    size={55}
-    className="mx-auto"
-    color={"#4E4FEB"}
-  />,
-]
+import { skillsIcon } from "@/constants/icons"
 
 const Skills = () => {
   return (

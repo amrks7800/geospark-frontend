@@ -20,6 +20,8 @@ import Skills from "./Skills"
 import AddVideoModal from "./AddVideoModal"
 import { StepCounter } from "./Stepper"
 import VideoPlayer from "./VideoPlayer"
+import About from "./About"
+import SocialMediaIcons from "./SocialMediaIcons"
 
 export {
   Providers,
@@ -44,4 +46,6 @@ export {
   AddVideoModal,
   StepCounter,
   VideoPlayer,
+  About,
+  SocialMediaIcons,
 }

@@ -63,7 +63,7 @@ export interface SidebarSwitchProps {
 }
 
 export interface TableProps {
-  headers: string[]
+  headers: (string | ReactNode)[]
   items?: (User | Video)[]
   type: "users" | "videos"
 }

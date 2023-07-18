@@ -16,6 +16,8 @@ import {
 } from "next/navigation"
 import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
+import { MdOutlineSubtitles } from "react-icons/md"
+import { BiLinkAlt } from "react-icons/bi"
 
 type PageProps = {
   params: { chapterId: string; user: "teachers" | "users" }
@@ -56,7 +58,16 @@ const Page = ({ params }: PageProps) => {
           <div className="max-sm:overflow-x-scroll max-sm:w-[85vw] max-sm:mx-auto">
             <div className="w-fit">
               <Table
-                headers={["العنوان", "الرابط"]}
+                headers={[
+                  <div className="flex items-center gap-1">
+                    <MdOutlineSubtitles size={25} />
+                    العنوان
+                  </div>,
+                  <div className="flex items-center gap-1">
+                    <BiLinkAlt size={25} />
+                    الرابط
+                  </div>,
+                ]}
                 items={data.videos}
                 type="videos"
               />

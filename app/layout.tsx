@@ -8,7 +8,7 @@ const almarai = Almarai({
 })
 
 export const metadata = {
-  title: "GeoSpark",
+  title: "T-Rex",
   description: "Teaching",
 }
 

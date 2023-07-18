@@ -4,6 +4,11 @@ import { Table } from "@/components"
 import { useQuery } from "@tanstack/react-query"
 import { getAllUsers } from "@/utils"
 import { Spinner } from "@chakra-ui/react"
+import {
+  MdDriveFileRenameOutline,
+  MdOutlineAlternateEmail,
+} from "react-icons/md"
+import { GrStatusUnknown } from "react-icons/gr"
 
 export default function Page() {
   const { data, error, isLoading } = useQuery({
@@ -18,9 +23,18 @@ export default function Page() {
           <div className="w-fit">
             <Table
               headers={[
-                "الاسم",
-                "البريد الالكتروني",
-                "الحالة",
+                <div className="flex items-center gap-1">
+                  <MdDriveFileRenameOutline size={25} />
+                  الاسم
+                </div>,
+                <div className="flex items-center gap-1">
+                  <MdOutlineAlternateEmail size={25} />
+                  البريد الالكتروني
+                </div>,
+                <div className="flex items-center gap-1">
+                  <GrStatusUnknown size={25} />
+                  الحالة
+                </div>,
               ]}
               items={data?.users}
               type="users"

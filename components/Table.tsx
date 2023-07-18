@@ -16,7 +16,7 @@ import { toast } from "react-toastify"
 
 const Table = ({ headers, items, type }: TableProps) => {
   return (
-    <table className="border border-primary-blue border-spacing-0 me-6 mb-10">
+    <table className="border border-primary-blue border-spacing-0 rounded-lg">
       <thead>
         <tr>
           {headers.map((label, i) => (

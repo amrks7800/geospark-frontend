@@ -32,13 +32,13 @@ const Navbar = () => {
             className="flex items-center justify-center gap-2"
           >
             <Image
-              src="/logo.png"
+              src="/t-rex.png"
               alt="logo"
               width={50}
               height={50}
             />
             <h1 className="text-primary-blue text-2xl font-bold tracking-wider sm:block hidden">
-              GeoSpark
+              T-Rex
             </h1>
           </Link>
         </div>

@@ -8,15 +8,17 @@ const Hero = () => {
     <div className="flex items-center justify-center py-14 container mx-auto min-h-[85vh] relative sm:flex-row flex-col">
       <div className="flex-1 self-center max-sm:text-center">
         <h1 className="sm:text-3xl text-2xl font-bold text-primary-blue">
-          اكتشف كل ما لا تعرفه عن الجيولوجي.
+          اكتشف كل ما لا تعرفه عن الجيولوجيا.
         </h1>
         <p className="text-[#777] sm:my-5 my-2 max-w-[350px] leading-5 text-lg font-semibold max-sm:mx-auto">
           أفضل مجموعة متنوعه من كورسات مادة الجيولوجي
           للثانوية العامة، بطريقة تفاعلية و تقييمية.
         </p>
-        <Button text="اكتشف" style="font-bold px-7" />
+        <Link href="#about">
+          <Button text="اكتشف" style="font-bold px-7" />
+        </Link>
       </div>
-      <div className="flex-1 self-center">
+      <div className="flex-1 self-center flex justify-end">
         <Image
           src="/layers.png"
           alt="layers"

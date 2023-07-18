@@ -6,10 +6,9 @@ import {
   teachersNavLink,
 } from "@/constants"
 import DashboardLink from "./DashboardLink"
-import { FaChalkboardTeacher } from "react-icons/fa"
-import { PiStudentFill } from "react-icons/pi"
 import { useSidebarStore } from "@/store"
 import LogOutLink from "./LogOutLink"
+import { dashboardIcons as icons } from "@/constants/icons"
 
 const DashboardSidebar = () => {
   const [navLinks, setNavLinks] = useState({
@@ -18,9 +17,6 @@ const DashboardSidebar = () => {
   })
 
   const isOpen = useSidebarStore(state => state.isOpen)
-  const setIsOpen = useSidebarStore(
-    state => state.setIsOpen
-  )
 
   const pathname = usePathname()
   return (
@@ -42,13 +38,7 @@ const DashboardSidebar = () => {
                     navLinks.studentsNavLink.activeIdx
                   }
                   setNavLinks={setNavLinks}
-                  icon={
-                    i === 0 ? (
-                      <FaChalkboardTeacher size={25} />
-                    ) : (
-                      <PiStudentFill size={25} />
-                    )
-                  }
+                  icon={icons[i]}
                   key={i}
                 />
               )
@@ -62,13 +52,7 @@ const DashboardSidebar = () => {
                     navLinks.teachersNavLink.activeIdx
                   }
                   setNavLinks={setNavLinks}
-                  icon={
-                    i === 0 ? (
-                      <FaChalkboardTeacher size={25} />
-                    ) : (
-                      <PiStudentFill size={25} />
-                    )
-                  }
+                  icon={icons[i]}
                   key={i}
                 />
               )
