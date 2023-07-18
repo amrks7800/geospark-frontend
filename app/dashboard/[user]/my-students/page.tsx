@@ -8,7 +8,7 @@ import {
   MdDriveFileRenameOutline,
   MdOutlineAlternateEmail,
 } from "react-icons/md"
-import { GrStatusUnknown } from "react-icons/gr"
+import { BsFillGeoFill } from "react-icons/bs"
 
 export default function Page() {
   const { data, error, isLoading } = useQuery({
@@ -32,7 +32,7 @@ export default function Page() {
                   البريد الالكتروني
                 </div>,
                 <div className="flex items-center gap-1">
-                  <GrStatusUnknown size={25} />
+                  <BsFillGeoFill size={25} />
                   الحالة
                 </div>,
               ]}
