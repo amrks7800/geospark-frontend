@@ -1,5 +1,6 @@
 "use client"
 
+import { useMemo } from "react"
 import {
   AddVideoModal,
   StepCounter,
@@ -18,12 +19,16 @@ import { useEffect, useState } from "react"
 import { toast } from "react-toastify"
 import { MdOutlineSubtitles } from "react-icons/md"
 import { BiLinkAlt } from "react-icons/bi"
+import { useProgressStore } from "@/store"
 
 type PageProps = {
   params: { chapterId: string; user: "teachers" | "users" }
 }
 
 const Page = ({ params }: PageProps) => {
+  const setNewChapter = useProgressStore(
+    state => state.setNewChapter
+  )
   const [active, setActive] = useState(1)
 
   const router = useRouter()
@@ -33,11 +38,23 @@ const Page = ({ params }: PageProps) => {
     queryKey: ["video"],
   })
 
+  const progressPercentage = useMemo(() => {
+    if (data?.videos.length) {
+      return (active / data?.videos.length) * 100
+    }
+  }, [active])
+
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
   useEffect(() => {
     router.push(`${pathname}?v=${active}`)
+    if (progressPercentage) {
+      setNewChapter({
+        id: params.chapterId,
+        progress: progressPercentage,
+      })
+    }
   }, [active])
 
   useEffect(() => {

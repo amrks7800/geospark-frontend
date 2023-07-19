@@ -72,7 +72,7 @@ const BodyCell = ({ children, isEmpty }: CellProps) => {
   )
 }
 
-const UserTr = ({ user }: { user: any }) => {
+const UserTr = ({ user }: { user: User }) => {
   const [checked, setChecked] = useState(!!user.subscribed)
   const queryClient = useQueryClient()
 
@@ -138,7 +138,7 @@ const UserTr = ({ user }: { user: any }) => {
   )
 }
 
-const VideoTr = ({ video }: { video: any }) => {
+const VideoTr = ({ video }: { video: Video }) => {
   const queryClient = useQueryClient()
 
   const deleteMutation = useMutation({

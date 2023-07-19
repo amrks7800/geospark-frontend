@@ -62,11 +62,18 @@ export interface SidebarSwitchProps {
   setIsOpen: Dispatch<SetStateAction<boolean>>
 }
 
-export interface TableProps {
+export type TableProps = {
   headers: (string | ReactNode)[]
-  items?: (User | Video)[]
-  type: "users" | "videos"
-}
+} & (
+  | {
+      type: "users"
+      items: User[]
+    }
+  | {
+      type: "videos"
+      items: Video[]
+    }
+)
 
 export interface CellProps {
   children: ReactNode

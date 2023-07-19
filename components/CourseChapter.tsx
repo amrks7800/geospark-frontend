@@ -11,13 +11,21 @@ import { deleteChapter, getCurrentUser } from "@/utils"
 import { BiTrash } from "react-icons/bi"
 import { toast } from "react-toastify"
 import { usePathname, useRouter } from "next/navigation"
+import { useProgressStore } from "@/store"
 
 type CourseChapterProps = {
   chapter: Chapter
 }
 
 const CourseChapter = ({ chapter }: CourseChapterProps) => {
-  const PROGRESS_VALUE = Math.floor(Math.random() * 100)
+  const progressArray = useProgressStore(
+    state => state.chapters
+  )
+
+  const progress = progressArray.filter(
+    item => item.id === chapter.id
+  )[0]
+
   const pathname = usePathname()
 
   const { data } = useQuery({
@@ -74,12 +82,12 @@ const CourseChapter = ({ chapter }: CourseChapterProps) => {
           </h2>
           <div className="flex gap-2 items-center">
             <Progress
-              value={PROGRESS_VALUE}
+              value={progress.progress || 0}
               size="sm"
               colorScheme="blue"
               className="rounded-full flex-1"
             />
-            <span>{PROGRESS_VALUE}%</span>
+            <span>{progress.progress || 0}%</span>
           </div>
         </div>
       )}
