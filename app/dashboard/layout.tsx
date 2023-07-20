@@ -7,7 +7,7 @@ const layout = ({
   children: React.ReactNode
 }) => {
   return (
-    <div className="flex items-stretch justify-stretch min-h-[88vh]">
+    <div className="flex items-stretch justify-stretch cut-viewport-height">
       <DashboardSidebar />
       {children}
     </div>

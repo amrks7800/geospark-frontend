@@ -7,7 +7,7 @@ import {
   Table,
   VideoPlayer,
 } from "@/components"
-import { getChapterVideos } from "@/utils"
+import { getChapterVideos, getExam } from "@/utils"
 import { Button } from "@chakra-ui/react"
 import { useQuery } from "@tanstack/react-query"
 import {
@@ -16,39 +16,43 @@ import {
   useSearchParams,
 } from "next/navigation"
 import { useEffect, useState } from "react"
-import { toast } from "react-toastify"
 import { MdOutlineSubtitles } from "react-icons/md"
 import { BiLinkAlt } from "react-icons/bi"
 import { useProgressStore } from "@/store"
 
 type PageProps = {
-  params: { chapterId: string; user: "teachers" | "users" }
+  params: {
+    chapterId: string
+    courseId: string
+    user: "teachers" | "users"
+  }
 }
 
 const Page = ({ params }: PageProps) => {
+  const [active, setActive] = useState(1)
+
   const setNewChapter = useProgressStore(
     state => state.setNewChapter
   )
-  const [active, setActive] = useState(1)
 
   const router = useRouter()
+  const pathname = usePathname()
+  const searchParams = useSearchParams()
 
-  const { data, isError } = useQuery({
+  const { data: videosResult } = useQuery({
     queryFn: () => getChapterVideos(params.chapterId),
     queryKey: ["video"],
   })
 
   const progressPercentage = useMemo(() => {
-    if (data?.videos.length) {
-      return (active / data?.videos.length) * 100
+    if (videosResult?.videos.length) {
+      return (active / videosResult?.videos.length) * 100
     }
   }, [active])
 
-  const pathname = usePathname()
-  const searchParams = useSearchParams()
-
   useEffect(() => {
     router.push(`${pathname}?v=${active}`)
+
     if (progressPercentage) {
       setNewChapter({
         id: params.chapterId,
@@ -63,11 +67,7 @@ const Page = ({ params }: PageProps) => {
     }
   }, [pathname])
 
-  if (isError) {
-    toast("انت غير مشترك او حدث خطأ", { type: "error" })
-  }
-
-  if (data) {
+  if (videosResult) {
     if (params.user === "teachers") {
       return (
         <div className="p-4 flex-1 h-[88vh] overflow-y-scroll">
@@ -85,7 +85,7 @@ const Page = ({ params }: PageProps) => {
                     الرابط
                   </div>,
                 ]}
-                items={data.videos}
+                items={videosResult.videos}
                 type="videos"
               />
             </div>
@@ -97,11 +97,13 @@ const Page = ({ params }: PageProps) => {
         <div className="p-4 flex-1 h-[88vh] overflow-y-scroll">
           <div className="max-sm:overflow-x-scroll max-sm:w-[85vw] max-sm:mx-auto">
             <StepCounter
-              steps={data.videos}
+              steps={videosResult.videos}
               activeIdx={active}
             />
           </div>
-          <VideoPlayer video={data.videos[active - 1]} />
+          <VideoPlayer
+            video={videosResult.videos[active - 1]}
+          />
           <div className="max-w-[560px] my-3 flex items-center justify-between mx-auto">
             <Button
               onClick={() => {
@@ -114,7 +116,8 @@ const Page = ({ params }: PageProps) => {
             </Button>
             <Button
               onClick={() => {
-                if (active === data.videos.length) return
+                if (active === videosResult.videos.length)
+                  return
                 setActive(prev => prev + 1)
               }}
               variant={"outline"}

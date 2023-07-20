@@ -157,3 +157,27 @@ export interface Video {
 export type AddVideoProps = Video & {
   chapterId: string
 }
+
+export interface Exam {
+  id: string
+  title: string
+  courseId: string
+  chapterId: string
+}
+
+export interface AddExamToChapterProps {
+  chapterId: string
+  newExam: Exam
+}
+
+export interface Question {
+  id: string
+  question: string
+  correctAnswer: string
+  examId: string
+}
+
+export interface AddQuestionToExamProps {
+  examId: string
+  question: Partial<Question>
+}

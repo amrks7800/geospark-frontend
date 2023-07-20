@@ -35,7 +35,7 @@ strong {
 }
 
 .cut-viewport-height {
-  min-height: calc(100vh - 74px);
+  min-height: calc(100vh - 200px);
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */

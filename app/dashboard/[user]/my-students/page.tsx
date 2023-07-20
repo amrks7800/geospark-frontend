@@ -9,6 +9,7 @@ import {
   MdOutlineAlternateEmail,
 } from "react-icons/md"
 import { BsFillGeoFill } from "react-icons/bs"
+import ChakraTable from "@/components/ChakraTable"
 
 export default function Page() {
   const { data, error, isLoading } = useQuery({

@@ -12,6 +12,10 @@ import {
   Chapter,
   Video,
   AddVideoProps,
+  AddExamToChapterProps,
+  Exam,
+  AddQuestionToExamProps,
+  Question,
 } from "@/types"
 import { toast } from "react-toastify"
 
@@ -34,7 +38,7 @@ const handleErrorMiddleware = (code: number) => {
 
     throw new Error("قم بتسجيل الدخول")
   } else {
-    throw new Error("حدث خطا")
+    throw new Error("حدث خطأ، رجاءاً حاول مرة اخري")
   }
 }
 
@@ -338,6 +342,119 @@ export const addVideo = async (newVideo: AddVideoProps) => {
       method: "POST",
       credentials: "include",
       body: JSON.stringify(newVideo),
+      headers: {
+        "Content-type": "application/json",
+      },
+    }
+  )
+
+  if (!request.ok) {
+    handleErrorMiddleware(request.status)
+  }
+
+  const response = await request.json()
+
+  return response
+}
+
+export const addExamToChapter = async ({
+  chapterId,
+  newExam,
+}: AddExamToChapterProps): Promise<any> => {
+  const request = await fetch(
+    `${api}/chapters/${chapterId}/exams`,
+    {
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify(newExam),
+      headers: {
+        "Content-type": "application/json",
+      },
+    }
+  )
+
+  if (!request.ok) {
+    handleErrorMiddleware(request.status)
+  }
+
+  const response = await request.json()
+
+  return response
+}
+
+export const getExam = async (
+  examId: string
+): Promise<Partial<Exam>> => {
+  const request = await fetch(`${api}/exams/${examId}`, {
+    credentials: "include",
+  })
+
+  if (!request.ok) {
+    handleErrorMiddleware(request.status)
+  }
+
+  const response = await request.json()
+
+  return response
+}
+
+export const addQuestionToExam = async ({
+  examId,
+  question,
+}: AddQuestionToExamProps): Promise<any> => {
+  const request = await fetch(
+    `${api}/exams/${examId}/questions`,
+    {
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify(question),
+      headers: {
+        "Content-type": "application/json",
+      },
+    }
+  )
+
+  if (!request.ok) {
+    handleErrorMiddleware(request.status)
+  }
+
+  const response = await request.json()
+
+  return response
+}
+
+export const getQuestion = async (
+  questionId: string
+): Promise<Partial<Question>> => {
+  const request = await fetch(
+    `${api}/questions/${questionId}`,
+    {
+      credentials: "include",
+    }
+  )
+
+  if (!request.ok) {
+    handleErrorMiddleware(request.status)
+  }
+
+  const response = await request.json()
+
+  return response
+}
+
+export const checkAnswer = async ({
+  questionId,
+  answer,
+}: {
+  questionId: string
+  answer: string
+}): Promise<{ isCorrect: boolean }> => {
+  const request = await fetch(
+    `${api}/questions/${questionId}/check`,
+    {
+      method: "POST",
+      credentials: "include",
+      body: JSON.stringify(answer),
       headers: {
         "Content-type": "application/json",
       },

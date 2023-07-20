@@ -24,7 +24,7 @@ const DashboardSidebar = () => {
       className={`bg-[#fcfbfb] shadow-xl basis-[240px]
       w-60 md:static md:translate-x-0 absolute z-10 ${
         isOpen ? "translate-x-0" : "translate-x-[240px]"
-      } h-[88vh] transition-transform duration-300
+      } cut-viewport-height transition-transform duration-300
       flex flex-col overflow-scroll hide-scroll-bars
       `}
     >

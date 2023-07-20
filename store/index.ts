@@ -5,7 +5,7 @@ type SidebarState = {
   setIsOpen: () => void
 }
 
-export const useSidebarStore = create<SidebarState>(
+export const useSidebarStore = create<SidebarState>()(
   set => ({
     isOpen: false,
     setIsOpen: () =>
@@ -20,7 +20,7 @@ type ProgressState = {
   setNewChapter: (newChapter: Chapter) => void
 }
 
-export const useProgressStore = create<ProgressState>(
+export const useProgressStore = create<ProgressState>()(
   set => ({
     setNewChapter: newChapter =>
       set(state => ({

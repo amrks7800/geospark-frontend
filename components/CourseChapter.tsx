@@ -82,12 +82,12 @@ const CourseChapter = ({ chapter }: CourseChapterProps) => {
           </h2>
           <div className="flex gap-2 items-center">
             <Progress
-              value={progress.progress || 0}
+              value={progress?.progress || 0}
               size="sm"
               colorScheme="blue"
               className="rounded-full flex-1"
             />
-            <span>{progress.progress || 0}%</span>
+            <span>{progress?.progress || 0}%</span>
           </div>
         </div>
       )}
