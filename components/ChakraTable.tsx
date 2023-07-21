@@ -12,6 +12,9 @@ import {
 } from "@chakra-ui/react"
 import { Exam } from "@/types"
 import { BiTrash } from "react-icons/bi"
+import { useMutation } from "@tanstack/react-query"
+import { deleteExam } from "@/utils"
+import { toast } from "react-toastify"
 
 type ChakraTableProps = {
   headers: (string | ReactNode)[]
@@ -25,6 +28,18 @@ const ChakraTable = ({
   type,
   bodyItem,
 }: ChakraTableProps) => {
+  const deleteExamMutation = useMutation({
+    mutationFn: deleteExam,
+    onSuccess: () => {
+      toast("تم", {
+        type: "success",
+      })
+    },
+    onError: () => {
+      toast("حاول مرة اخري", { type: "error" })
+    },
+  })
+
   return (
     <TableContainer
       border={"1px"}

@@ -167,7 +167,7 @@ export interface Exam {
 
 export interface AddExamToChapterProps {
   chapterId: string
-  newExam: Exam
+  newExam: Partial<Exam>
 }
 
 export interface Question {

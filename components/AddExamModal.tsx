@@ -13,6 +13,10 @@ import {
   Input,
 } from "@chakra-ui/react"
 import { AiOutlinePlus } from "react-icons/ai"
+import { useMutation } from "@tanstack/react-query"
+import { addExamToChapter } from "@/utils"
+import { toast } from "react-toastify"
+import { useRouter } from "next/navigation"
 
 type ModalProps = {
   chapterId: string
@@ -20,8 +24,21 @@ type ModalProps = {
 
 const AddExamModal = ({ chapterId }: ModalProps) => {
   const [title, setTitle] = useState("")
-
   const { isOpen, onOpen, onClose } = useDisclosure()
+  const router = useRouter()
+
+  const addExam = useMutation({
+    mutationFn: addExamToChapter,
+    onSuccess: () => {
+      toast("تم", { type: "success" })
+      onClose()
+      router.refresh()
+    },
+    onError: () => {
+      toast("حاول مرة اخري", { type: "error" })
+    },
+  })
+
   return (
     <>
       <Button
@@ -54,7 +71,17 @@ const AddExamModal = ({ chapterId }: ModalProps) => {
             >
               إلغاء
             </Button>
-            <Button variant="ghost">إضافة</Button>
+            <Button
+              variant="ghost"
+              onClick={() => {
+                addExam.mutate({
+                  chapterId,
+                  newExam: { title },
+                })
+              }}
+            >
+              إضافة
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
