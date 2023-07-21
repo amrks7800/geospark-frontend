@@ -22,6 +22,8 @@ import { StepCounter } from "./Stepper"
 import VideoPlayer from "./VideoPlayer"
 import About from "./About"
 import SocialMediaIcons from "./SocialMediaIcons"
+import AddExamModal from "./AddExamModal"
+import ChakraTable from "./ChakraTable"
 
 export {
   Providers,
@@ -48,4 +50,6 @@ export {
   VideoPlayer,
   About,
   SocialMediaIcons,
+  AddExamModal,
+  ChakraTable,
 }

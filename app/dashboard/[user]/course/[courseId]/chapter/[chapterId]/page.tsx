@@ -2,12 +2,18 @@
 
 import { useMemo } from "react"
 import {
+  AddExamModal,
   AddVideoModal,
+  ChakraTable,
   StepCounter,
   Table,
   VideoPlayer,
 } from "@/components"
-import { getChapterVideos, getExam } from "@/utils"
+import {
+  getChapterExams,
+  getChapterVideos,
+  getExam,
+} from "@/utils"
 import { Button } from "@chakra-ui/react"
 import { useQuery } from "@tanstack/react-query"
 import {
@@ -67,12 +73,18 @@ const Page = ({ params }: PageProps) => {
     }
   }, [pathname])
 
-  if (videosResult) {
+  const { data: exams, isError } = useQuery({
+    queryFn: () =>
+      getChapterExams({ chapterId: params.chapterId }),
+    queryKey: ["exams"],
+  })
+
+  if (videosResult && exams) {
     if (params.user === "teachers") {
       return (
         <div className="p-4 flex-1 h-[88vh] overflow-y-scroll">
           <AddVideoModal chapterId={params.chapterId} />
-          <div className="max-sm:overflow-x-scroll max-sm:w-[85vw] max-sm:mx-auto">
+          <div className="max-sm:overflow-x-scroll max-sm:w-[85vw] max-sm:mx-auto mb-5">
             <div className="w-fit">
               <Table
                 headers={[
@@ -90,6 +102,12 @@ const Page = ({ params }: PageProps) => {
               />
             </div>
           </div>
+          <AddExamModal chapterId={params.chapterId} />
+          <ChakraTable
+            headers={["عنوان الامتحان", "حذف"]}
+            type="exams"
+            bodyItem={exams?.exams}
+          />
         </div>
       )
     } else if (params.user === "users") {

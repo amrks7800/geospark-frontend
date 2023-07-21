@@ -11,6 +11,7 @@ import {
   TableContainer,
 } from "@chakra-ui/react"
 import { Exam } from "@/types"
+import { BiTrash } from "react-icons/bi"
 
 type ChakraTableProps = {
   headers: (string | ReactNode)[]
@@ -46,24 +47,14 @@ const ChakraTable = ({
           </Tr>
         </Thead>
         <Tbody>
-          <Tr>
-            <Td>inches</Td>
-            <Td>millimetres (mm)</Td>
-            <Td isNumeric>25.4</Td>
-            <Td isNumeric>25.4</Td>
-          </Tr>
-          <Tr>
-            <Td>feet</Td>
-            <Td>centimetres (cm)</Td>
-            <Td isNumeric>30.48</Td>
-            <Td isNumeric>30.48</Td>
-          </Tr>
-          <Tr>
-            <Td>yards</Td>
-            <Td>metres (m)</Td>
-            <Td isNumeric>0.91444</Td>
-            <Td isNumeric>0.91444</Td>
-          </Tr>
+          {bodyItem.map(exam => (
+            <Tr key={exam.id}>
+              <Td>{exam.title}</Td>
+              <Td>
+                <BiTrash size={25} color="red" />
+              </Td>
+            </Tr>
+          ))}
         </Tbody>
       </Table>
     </TableContainer>

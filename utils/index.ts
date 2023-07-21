@@ -469,3 +469,41 @@ export const checkAnswer = async ({
 
   return response
 }
+
+export const getChapterExams = async ({
+  chapterId,
+}: {
+  chapterId: string
+}): Promise<{ exams: Exam[] }> => {
+  const request = await fetch(
+    `${api}/chapters/${chapterId}/exams`,
+    {
+      credentials: "include",
+    }
+  )
+
+  if (!request.ok) {
+    handleErrorMiddleware(request.status)
+  }
+
+  const response = await request.json()
+
+  return response
+}
+
+export const deleteExam = async (
+  examId: string
+): Promise<any> => {
+  const request = await fetch(`${api}/exams/${examId}`, {
+    credentials: "include",
+    method: "DELETE",
+  })
+
+  if (!request.ok) {
+    handleErrorMiddleware(request.status)
+  }
+
+  const response = await request.json()
+
+  return response
+}
