@@ -104,7 +104,7 @@ const Page = ({ params }: PageProps) => {
           </div>
           <AddExamModal chapterId={params.chapterId} />
           <ChakraTable
-            headers={["عنوان الامتحان", "حذف"]}
+            headers={["عنوان الامتحان", "الترتيب", "حذف"]}
             type="exams"
             bodyItem={exams?.exams}
           />

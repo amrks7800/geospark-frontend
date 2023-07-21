@@ -15,38 +15,42 @@ import { BiTrash } from "react-icons/bi"
 import { toast } from "react-toastify"
 
 const Table = ({ headers, items, type }: TableProps) => {
-  return (
-    <table className="border border-primary-blue border-spacing-0 rounded-lg">
-      <thead>
-        <tr>
-          {headers.map((label, i) => (
-            <HeadCell key={i}>{label}</HeadCell>
-          ))}
-          {type === "users" ? (
-            <HeadCell>
-              <div className="flex items-center justify-between">
-                <p className="text-primary-blue">تنشيط</p>
-                <p className="text-red-600">حذف</p>
-              </div>
-            </HeadCell>
-          ) : (
-            <HeadCell>
-              <p className="text-red-600">حذف</p>
-            </HeadCell>
-          )}
-        </tr>
-      </thead>
-      <tbody>
-        {type === "users"
-          ? items?.map(item => (
-              <UserTr user={item} key={item.id} />
-            ))
-          : items?.map(item => (
-              <VideoTr video={item} key={item.id} />
+  if (items.length) {
+    return (
+      <table className="border border-primary-blue border-spacing-0 rounded-lg">
+        <thead>
+          <tr>
+            {headers.map((label, i) => (
+              <HeadCell key={i}>{label}</HeadCell>
             ))}
-      </tbody>
-    </table>
-  )
+            {type === "users" ? (
+              <HeadCell>
+                <div className="flex items-center justify-between">
+                  <p className="text-primary-blue">تنشيط</p>
+                  <p className="text-red-600">حذف</p>
+                </div>
+              </HeadCell>
+            ) : (
+              <HeadCell>
+                <p className="text-red-600">حذف</p>
+              </HeadCell>
+            )}
+          </tr>
+        </thead>
+        <tbody>
+          {type === "users"
+            ? items?.map(item => (
+                <UserTr user={item} key={item.id} />
+              ))
+            : items?.map(item => (
+                <VideoTr video={item} key={item.id} />
+              ))}
+        </tbody>
+      </table>
+    )
+  } else {
+    return <h1>ليس هناك بيانات مدرجة بعد</h1>
+  }
 }
 
 const HeadCell = ({ children, isEmpty }: CellProps) => {
