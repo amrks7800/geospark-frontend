@@ -15,6 +15,8 @@ import { BiTrash } from "react-icons/bi"
 import { useMutation } from "@tanstack/react-query"
 import { deleteExam } from "@/utils"
 import { toast } from "react-toastify"
+import { usePathname } from "next/navigation"
+import Link from "next/link"
 
 type ChakraTableProps = {
   headers: (string | ReactNode)[]
@@ -40,6 +42,8 @@ const ChakraTable = ({
     },
   })
 
+  const pathname = usePathname()
+
   return (
     <TableContainer
       border={"1px"}
@@ -64,7 +68,11 @@ const ChakraTable = ({
         <Tbody>
           {bodyItem.map(exam => (
             <Tr key={exam.id}>
-              <Td>{exam.title}</Td>
+              <Td>
+                <Link href={`${pathname}/exams/${exam.id}`}>
+                  {exam.title}
+                </Link>
+              </Td>
               <Td>
                 <BiTrash
                   size={25}
