@@ -24,10 +24,13 @@ const Course = async ({
           <AddChapterModal courseId={courseId} />
         )}
         <div>
-          {chapters &&
+          {chapters ? (
             chapters.map((chapter, i) => (
               <CourseChapter chapter={chapter} key={i} />
-            ))}
+            ))
+          ) : (
+            <h1>ليس هناك شباتر هنا بعد</h1>
+          )}
         </div>
       </div>
     </div>

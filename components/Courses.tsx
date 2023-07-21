@@ -17,10 +17,13 @@ const Courses = () => {
       templateColumns="repeat(auto-fill, minmax(200px, 1fr))"
       className="my-4"
     >
-      {courses?.courses &&
+      {courses?.courses ? (
         courses.courses.map((course, i) => (
           <ProjectCard course={course} key={i} />
-        ))}
+        ))
+      ) : (
+        <h1>أضف الكورس الاول 😍👌.</h1>
+      )}
     </SimpleGrid>
   )
 }
