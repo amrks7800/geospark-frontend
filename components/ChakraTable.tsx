@@ -69,7 +69,10 @@ const ChakraTable = ({
           {bodyItem.map(exam => (
             <Tr key={exam.id}>
               <Td>
-                <Link href={`${pathname}/exams/${exam.id}`}>
+                <Link
+                  href={`${pathname}/exams/${exam.id}`}
+                  className="hover:underline"
+                >
                   {exam.title}
                 </Link>
               </Td>

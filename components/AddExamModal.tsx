@@ -36,7 +36,7 @@ const AddExamModal = ({ chapterId }: ModalProps) => {
     onSuccess: () => {
       toast("تم", { type: "success" })
       router.refresh()
-      queryClient.invalidateQueries(["exam"])
+      queryClient.invalidateQueries(["exams"])
       onClose()
     },
     onError: () => {
