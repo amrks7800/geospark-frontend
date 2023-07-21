@@ -66,7 +66,14 @@ const ChakraTable = ({
             <Tr key={exam.id}>
               <Td>{exam.title}</Td>
               <Td>
-                <BiTrash size={25} color="red" />
+                <BiTrash
+                  size={25}
+                  color="red"
+                  className="cursor-pointer"
+                  onClick={() => {
+                    deleteExamMutation.mutate(exam.id)
+                  }}
+                />
               </Td>
             </Tr>
           ))}

@@ -13,7 +13,10 @@ import {
   Input,
 } from "@chakra-ui/react"
 import { AiOutlinePlus } from "react-icons/ai"
-import { useMutation } from "@tanstack/react-query"
+import {
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query"
 import { addExamToChapter } from "@/utils"
 import { toast } from "react-toastify"
 import { useRouter } from "next/navigation"
@@ -26,13 +29,15 @@ const AddExamModal = ({ chapterId }: ModalProps) => {
   const [title, setTitle] = useState("")
   const { isOpen, onOpen, onClose } = useDisclosure()
   const router = useRouter()
+  const queryClient = useQueryClient()
 
   const addExam = useMutation({
     mutationFn: addExamToChapter,
     onSuccess: () => {
       toast("تم", { type: "success" })
-      onClose()
       router.refresh()
+      queryClient.invalidateQueries(["exam"])
+      onClose()
     },
     onError: () => {
       toast("حاول مرة اخري", { type: "error" })
