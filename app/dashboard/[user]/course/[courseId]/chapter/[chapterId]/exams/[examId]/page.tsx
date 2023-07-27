@@ -34,9 +34,9 @@ const page = ({ params: { examId, user } }: PageProps) => {
   if (data) {
     if (user === "teachers") {
       return (
-        <div className="p-4 flex-1 h-[88vh] overflow-y-scroll">
+        <div className="p-4 flex-1 cut-viewport-height overflow-y-scroll">
           <AddQuestionModal examId={examId} />
-          <CustomAccordion />
+          <CustomAccordion questions={data.questions} />
         </div>
       )
     } else if (user === "users") {

@@ -6,7 +6,7 @@ import Link from "next/link"
 const Hero = () => {
   return (
     <div
-      className="flex items-center justify-center py-14 container mx-auto min-h-[85vh] relative sm:flex-row flex-col
+      className="flex items-center justify-center py-14 container mx-auto cut-viewport-height relative sm:flex-row flex-col
     bg-white rounded-xl p-2"
     >
       <div className="flex-1 self-center max-sm:text-center">

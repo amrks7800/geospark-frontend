@@ -82,7 +82,7 @@ const Page = ({ params }: PageProps) => {
   if (videosResult && exams) {
     if (params.user === "teachers") {
       return (
-        <div className="p-4 flex-1 h-[88vh] overflow-y-scroll">
+        <div className="p-4 flex-1 cut-viewport-height overflow-y-scroll">
           <AddVideoModal chapterId={params.chapterId} />
           <div className="max-sm:overflow-x-scroll max-sm:w-[85vw] max-sm:mx-auto mb-5">
             <div className="w-fit">
@@ -112,7 +112,7 @@ const Page = ({ params }: PageProps) => {
       )
     } else if (params.user === "users") {
       return (
-        <div className="p-4 flex-1 h-[88vh] overflow-y-scroll">
+        <div className="p-4 flex-1 cut-viewport-height overflow-y-scroll">
           <div className="max-sm:overflow-x-scroll max-sm:w-[85vw] max-sm:mx-auto">
             <StepCounter
               steps={videosResult.videos}

@@ -23,7 +23,7 @@ const Navbar = () => {
   })
 
   return (
-    <header className="shadow-sm bg-[#FCFBFB]">
+    <header className="shadow-sm bg-[#FCFBFB] h-[80px]">
       <div className="container mx-auto flex items-center justify-between py-3">
         <div className="flex items-center gap-2">
           <SidebarSwitch />

@@ -19,7 +19,7 @@ export default function Page() {
 
   if (data) {
     return (
-      <div className="p-4 flex-1 h-[88vh] overflow-y-scroll">
+      <div className="p-4 flex-1 cut-viewport-height overflow-y-scroll">
         <div className="max-sm:overflow-x-scroll max-sm:w-[85vw] max-sm:mx-auto">
           <div className="w-fit">
             <Table

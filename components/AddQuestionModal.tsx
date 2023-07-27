@@ -18,7 +18,7 @@ import {
   useMutation,
   useQueryClient,
 } from "@tanstack/react-query"
-import { useState } from "react"
+import React, { useState } from "react"
 import { AiOutlinePlus } from "react-icons/ai"
 import { toast } from "react-toastify"
 
@@ -30,11 +30,8 @@ const AddQuestionModal = ({
   const { isOpen, onOpen, onClose } = useDisclosure()
 
   const [answersLength, setAnswersLength] = useState(
-    Array(1).fill("")
+    Array(3).fill("")
   )
-
-  const [title, setTitle] = useState("")
-  const [description, setDescription] = useState("")
 
   const queryClient = useQueryClient()
 
@@ -46,6 +43,27 @@ const AddQuestionModal = ({
       onClose()
     },
   })
+
+  const handleSubmit = (
+    e: React.FormEvent<HTMLFormElement>
+  ) => {
+    e.preventDefault()
+
+    const formData = new FormData(e.currentTarget)
+
+    const question = {
+      question: String(formData.get("question")),
+      option1: String(formData.get("option1")),
+      option2: String(formData.get("option2")),
+      option3: String(formData.get("option3")),
+      correctAnswer: String(formData.get("correctAnswer")),
+    }
+
+    mutation.mutate({
+      examId,
+      question,
+    })
+  }
 
   return (
     <>
@@ -63,7 +81,7 @@ const AddQuestionModal = ({
         onClose={onClose}
       >
         <ModalOverlay />
-        <form action="">
+        <form onSubmit={handleSubmit}>
           <ModalContent>
             <ModalHeader className="text-primary-blue">
               أضف سؤال جديد.
@@ -75,8 +93,7 @@ const AddQuestionModal = ({
               <Textarea
                 variant={"filled"}
                 placeholder="ادخل عنوان السؤال"
-                value={title}
-                onChange={e => setTitle(e.target.value)}
+                name="question"
               ></Textarea>
               <h2 className="text-slate-400 my-2">
                 الاجابات
@@ -87,21 +104,9 @@ const AddQuestionModal = ({
                   placeholder={ABC[i]}
                   className="my-2"
                   key={i}
+                  name={`option${++i}`}
                 />
               ))}
-
-              {answersLength.length < 3 && (
-                <Button
-                  variant={"solid"}
-                  onClick={() =>
-                    setAnswersLength(prev =>
-                      Array(prev.length + 1).fill("")
-                    )
-                  }
-                >
-                  أضف أجابة جديدة
-                </Button>
-              )}
 
               <h2 className="text-slate-400 my-2">
                 ادخل رمز الاجابة الصحيحة
@@ -110,20 +115,14 @@ const AddQuestionModal = ({
               <Input
                 variant={"filled"}
                 placeholder={"a, b, c...."}
+                name="correctAnswer"
+                maxLength={1}
                 className="my-2"
               />
             </ModalBody>
 
             <ModalFooter>
-              <Button
-                bg="#4E4FEB"
-                mr={3}
-                type={"submit"}
-                onClick={() => {
-                  // mutation.mutate({
-                  // })
-                }}
-              >
+              <Button bg="#4E4FEB" mr={3} type={"submit"}>
                 حفظ
               </Button>
               <Button

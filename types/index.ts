@@ -175,6 +175,9 @@ export interface Question {
   question: string
   correctAnswer: string
   examId: string
+  option1: string
+  option2: string
+  option3: string
 }
 
 export interface AddQuestionToExamProps {
@@ -185,6 +188,13 @@ export interface AddQuestionToExamProps {
 export interface ExamQuestionsResponse {
   questions: Pick<
     Question,
-    "id" | "question" | "correctAnswer"
+    "id" | "question" | "option1" | "option2" | "option3"
   >[]
+}
+
+export interface Result {
+  id: string
+  score: number
+  userId: string
+  examId: string
 }

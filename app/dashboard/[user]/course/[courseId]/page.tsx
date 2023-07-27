@@ -15,7 +15,7 @@ const Course = async ({
   ])
 
   return (
-    <div className="p-4 flex-1 overflow-y-scroll h-[88vh]">
+    <div className="p-4 flex-1 overflow-y-scroll cut-viewport-height">
       <div>
         <h1 className="mb-5 text-2xl text-primary-blue">
           {course.title}
