@@ -1,6 +1,6 @@
 "use client"
 
 const Error = () => {
-  return <div>an Error occurs</div>
+  return <div>هناك خطأ، حاول مرة اخري</div>
 }
 export default Error

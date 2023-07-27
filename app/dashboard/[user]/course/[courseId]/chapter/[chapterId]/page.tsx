@@ -122,27 +122,29 @@ const Page = ({ params }: PageProps) => {
           <VideoPlayer
             video={videosResult.videos[active - 1]}
           />
-          <div className="max-w-[560px] my-3 flex items-center justify-between mx-auto">
-            <Button
-              onClick={() => {
-                if (active === 1) return
-                setActive(prev => prev - 1)
-              }}
-              variant={"outline"}
-            >
-              السابق
-            </Button>
-            <Button
-              onClick={() => {
-                if (active === videosResult.videos.length)
-                  return
-                setActive(prev => prev + 1)
-              }}
-              variant={"outline"}
-            >
-              التالي
-            </Button>
-          </div>
+          {!!videosResult.videos.length && (
+            <div className="max-w-[560px] my-3 flex items-center justify-between mx-auto">
+              <Button
+                onClick={() => {
+                  if (active === 1) return
+                  setActive(prev => prev - 1)
+                }}
+                variant={"outline"}
+              >
+                السابق
+              </Button>
+              <Button
+                onClick={() => {
+                  if (active === videosResult.videos.length)
+                    return
+                  setActive(prev => prev + 1)
+                }}
+                variant={"outline"}
+              >
+                التالي
+              </Button>
+            </div>
+          )}
         </div>
       )
     }

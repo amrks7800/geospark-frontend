@@ -16,21 +16,22 @@ import {
   Exam,
   AddQuestionToExamProps,
   Question,
+  ExamQuestionsResponse,
 } from "@/types"
 import { toast } from "react-toastify"
 
 const api = "https://geospark.onrender.com"
 
-const handleErrorMiddleware = (code: number) => {
+const handleErrorMiddleware = (statusCode: number) => {
   if (typeof window !== "object") return
 
-  if (code === 403) {
+  if (statusCode === 403) {
     if (location.pathname.includes("signin"))
       throw new Error("الحساب ليس موجود")
 
     if (!location.pathname.includes("signin"))
       throw new Error("ليس لديك الصلاحية")
-  } else if (code === 401) {
+  } else if (statusCode === 401) {
     if (!location.pathname.includes("signin")) {
       location.pathname = "/signin"
       toast("يجب تسجيل الدخول من جديد", { type: "error" })
@@ -94,10 +95,6 @@ export const getCurrentUser =
       cache: "no-store",
       next: { revalidate: 0 },
     })
-
-    if (!request.ok) {
-      handleErrorMiddleware(request.status)
-    }
 
     const response = await request.json()
 
@@ -498,6 +495,25 @@ export const deleteExam = async (
     credentials: "include",
     method: "DELETE",
   })
+
+  if (!request.ok) {
+    handleErrorMiddleware(request.status)
+  }
+
+  const response = await request.json()
+
+  return response
+}
+
+export const getExamQuestions = async (
+  examId: string
+): Promise<ExamQuestionsResponse> => {
+  const request = await fetch(
+    `${api}/exams/${examId}/questions`,
+    {
+      credentials: "include",
+    }
+  )
 
   if (!request.ok) {
     handleErrorMiddleware(request.status)

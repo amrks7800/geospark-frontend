@@ -26,7 +26,7 @@ const Skills = () => {
         alt="wave"
         width={1366}
         height={300}
-        className="absolute w-full -z-10 bottom-0"
+        className="absolute w-full z-10 bottom-0"
       />
     </section>
   )

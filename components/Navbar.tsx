@@ -13,7 +13,7 @@ import SidebarSwitch from "./SidebarSwitch"
 const Navbar = () => {
   const pathname = usePathname()
 
-  const { data } = useQuery({
+  const { data, isLoading } = useQuery({
     queryFn: getCurrentUser,
     queryKey: [""],
     retry(failureCount) {
@@ -61,7 +61,10 @@ const Navbar = () => {
           </Link>
         ) : (
           <>
-            <div className="md:flex items-center justify-center gap-2 hidden">
+            <div
+              className="md:flex items-center justify-center gap-2 hidden"
+              hidden={isLoading}
+            >
               <Link href="/signin">
                 <Button
                   text="تسجيل الدخول"

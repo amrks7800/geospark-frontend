@@ -12,7 +12,10 @@ import {
 } from "@chakra-ui/react"
 import { Exam } from "@/types"
 import { BiTrash } from "react-icons/bi"
-import { useMutation } from "@tanstack/react-query"
+import {
+  useMutation,
+  useQueryClient,
+} from "@tanstack/react-query"
 import { deleteExam } from "@/utils"
 import { toast } from "react-toastify"
 import { usePathname } from "next/navigation"
@@ -30,9 +33,12 @@ const ChakraTable = ({
   type,
   bodyItem,
 }: ChakraTableProps) => {
+  const queryClient = useQueryClient()
+
   const deleteExamMutation = useMutation({
     mutationFn: deleteExam,
     onSuccess: () => {
+      queryClient.invalidateQueries(["exams"])
       toast("تم", {
         type: "success",
       })

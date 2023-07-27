@@ -13,14 +13,14 @@ const About = () => {
       <Image
         src={"/blob.svg"}
         alt="blob"
-        className="absolute -top-24 -right-32 md:block hidden -z-10"
+        className="absolute -top-24 -right-32 md:block hidden z-10"
         width={500}
         height={500}
       />
       <Image
         src={"/blob.svg"}
         alt="blob"
-        className="absolute -bottom-24 -left-32 md:block hidden -z-10"
+        className="absolute -bottom-24 -left-32 md:block hidden z-10"
         width={500}
         height={500}
       />

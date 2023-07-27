@@ -47,3 +47,5 @@ export const skillsContent = [
     text: "يتم تقييمك بشكل مستمر من خلال مدرس المادة",
   },
 ]
+
+export const ABC = ["a", "b", "c"]

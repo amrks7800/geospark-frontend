@@ -3,7 +3,7 @@
 import { AiOutlineMail } from "react-icons/ai"
 import { BiLockAlt } from "react-icons/bi"
 import { Link } from "@chakra-ui/next-js"
-import { Button } from "@chakra-ui/react"
+import { Button, Spinner } from "@chakra-ui/react"
 import {
   useMutation,
   useQueryClient,
@@ -85,8 +85,20 @@ const SigninForm = () => {
         fontSize={"xl"}
         rounded={"full"}
         type="submit"
+        disabled={mutation.isLoading}
+        className="disabled:bg-[#FCFBFB] w-[200px] flex items-center justify-center"
       >
-        تسجيل الدخول
+        {mutation.isLoading ? (
+          <Spinner
+            thickness="2px"
+            speed="1.5s"
+            emptyColor="gray.200"
+            color="blue.500"
+            size="md"
+          />
+        ) : (
+          "تسجيل الدخول"
+        )}
       </Button>
       <Link
         href="/signup"

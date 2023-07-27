@@ -181,3 +181,10 @@ export interface AddQuestionToExamProps {
   examId: string
   question: Partial<Question>
 }
+
+export interface ExamQuestionsResponse {
+  questions: Pick<
+    Question,
+    "id" | "question" | "correctAnswer"
+  >[]
+}

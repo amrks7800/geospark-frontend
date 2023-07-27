@@ -5,31 +5,38 @@ import Link from "next/link"
 
 const Hero = () => {
   return (
-    <div className="flex items-center justify-center py-14 container mx-auto min-h-[85vh] relative sm:flex-row flex-col">
+    <div
+      className="flex items-center justify-center py-14 container mx-auto min-h-[85vh] relative sm:flex-row flex-col
+    bg-white rounded-xl p-2"
+    >
       <div className="flex-1 self-center max-sm:text-center">
-        <h1 className="sm:text-3xl text-2xl font-bold text-primary-blue">
-          اكتشف كل ما لا تعرفه عن الجيولوجيا.
+        <h1 className="text-3xl sm:text-6xl text-[#2F2D51]">
+          اتعلم جيولوجيا
+          <span className="font-bold ms-2">صح </span>
         </h1>
-        <p className="text-[#777] sm:my-5 my-2 max-w-[350px] leading-5 text-lg font-semibold max-sm:mx-auto">
-          أفضل مجموعة متنوعه من كورسات مادة الجيولوجي
-          للثانوية العامة، بطريقة تفاعلية و تقييمية.
+        <p className="text-[#777] my-5  leading-5 text-lg font-semibold max-sm:mx-auto">
+          اتعلم الجيولوجيا بكل سهولة مع مستر أحمد الفرنواني
         </p>
         <Link href="#about">
-          <Button text="اكتشف" style="font-bold px-7" />
+          <Button
+            text="ابدأ"
+            style="font-bold px-5 py-4 rounded-lg w-[150px]"
+          />
         </Link>
       </div>
       <div className="flex-1 self-center flex justify-end">
         <Image
-          src="/layers.png"
-          alt="layers"
-          width={600}
-          height={500}
-          className="max-w-full drop-shadow-main md:w-[600px] md:h-[450px] w-[95vw] max-md:mx-auto"
+          src="/ms.png"
+          alt="mister"
+          width={300}
+          height={600}
+          className="drop-shadow-main md:w-[300px] md:h-[450px] w-[95vw] max-md:mx-auto"
         />
       </div>
       <Link
         href={"/#skills"}
-        className="flex flex-col justify-center items-center absolute bottom-10 right-1/2 translate-x-1/2 up-down"
+        className="flex flex-col justify-center items-center absolute bottom-10 right-1/2 translate-x-1/2 up-down
+        z-10"
       >
         <Image
           src="/Dino.png"

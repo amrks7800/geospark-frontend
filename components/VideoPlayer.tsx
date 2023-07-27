@@ -1,6 +1,7 @@
 import { Video } from "@/types"
 
 const VideoPlayer = ({ video }: { video: Video }) => {
+  if (!video) return <h1>لم يتم اضافة فيديو هنا بعد 🤔</h1>
   return (
     <>
       <h1 className="text-xl w-fit mx-auto text-primary-blue font-bold my-4">
