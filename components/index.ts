@@ -25,6 +25,7 @@ import SocialMediaIcons from "./SocialMediaIcons"
 import AddExamModal from "./AddExamModal"
 import ChakraTable from "./ChakraTable"
 import AddQuestionModal from "./AddQuestionModal"
+import UserExams from "./UserExams"
 
 export {
   Providers,
@@ -54,4 +55,5 @@ export {
   AddExamModal,
   ChakraTable,
   AddQuestionModal,
+  UserExams,
 }

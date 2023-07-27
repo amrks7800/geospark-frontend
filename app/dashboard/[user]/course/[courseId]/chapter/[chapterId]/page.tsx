@@ -7,6 +7,7 @@ import {
   ChakraTable,
   StepCounter,
   Table,
+  UserExams,
   VideoPlayer,
 } from "@/components"
 import {
@@ -114,10 +115,13 @@ const Page = ({ params }: PageProps) => {
       return (
         <div className="p-4 flex-1 cut-viewport-height overflow-y-scroll">
           <div className="max-sm:overflow-x-scroll max-sm:w-[85vw] max-sm:mx-auto">
-            <StepCounter
-              steps={videosResult.videos}
-              activeIdx={active}
-            />
+            <div className="flex items-center gap-3">
+              <StepCounter
+                steps={videosResult.videos}
+                activeIdx={active}
+              />
+              <UserExams chapterId={params.chapterId} />
+            </div>
           </div>
           <VideoPlayer
             video={videosResult.videos[active - 1]}

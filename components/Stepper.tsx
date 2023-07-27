@@ -35,7 +35,7 @@ export function StepCounter({
   }, [activeIdx])
 
   return (
-    <Stepper index={activeStep}>
+    <Stepper index={activeStep} className="flex-1">
       {steps.map((step, index) => (
         <Step key={index}>
           <StepIndicator>
