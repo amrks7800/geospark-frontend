@@ -115,7 +115,7 @@ const Page = ({ params }: PageProps) => {
       return (
         <div className="p-4 flex-1 cut-viewport-height overflow-y-scroll">
           <div className="flex items-center gap-3">
-            <div className="max-sm:overflow-x-scroll  max-sm:mx-auto">
+            <div className="max-sm:overflow-x-scroll flex-1 max-sm:mx-auto">
               <StepCounter
                 steps={videosResult.videos}
                 activeIdx={active}
