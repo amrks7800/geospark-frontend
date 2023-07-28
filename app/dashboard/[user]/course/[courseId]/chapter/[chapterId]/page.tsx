@@ -114,14 +114,14 @@ const Page = ({ params }: PageProps) => {
     } else if (params.user === "users") {
       return (
         <div className="p-4 flex-1 cut-viewport-height overflow-y-scroll">
-          <div className="max-sm:overflow-x-scroll max-sm:w-[85vw] max-sm:mx-auto">
-            <div className="flex items-center gap-3">
+          <div className="flex items-center gap-3">
+            <div className="max-sm:overflow-x-scroll  max-sm:mx-auto">
               <StepCounter
                 steps={videosResult.videos}
                 activeIdx={active}
               />
-              <UserExams chapterId={params.chapterId} />
             </div>
+            <UserExams chapterId={params.chapterId} />
           </div>
           <VideoPlayer
             video={videosResult.videos[active - 1]}
