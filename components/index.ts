@@ -26,6 +26,7 @@ import AddExamModal from "./AddExamModal"
 import ChakraTable from "./ChakraTable"
 import AddQuestionModal from "./AddQuestionModal"
 import UserExams from "./UserExams"
+import { ExamQuestion } from "./ExamQuestion"
 
 export {
   Providers,
@@ -56,4 +57,5 @@ export {
   ChakraTable,
   AddQuestionModal,
   UserExams,
+  ExamQuestion,
 }

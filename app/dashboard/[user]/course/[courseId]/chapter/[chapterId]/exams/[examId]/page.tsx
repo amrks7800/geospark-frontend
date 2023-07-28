@@ -1,9 +1,13 @@
 "use client"
 
-import { AddQuestionModal } from "@/components"
+import { useState, useEffect } from "react"
+import {
+  AddQuestionModal,
+  ExamQuestion,
+} from "@/components"
 import CustomAccordion from "@/components/Accordion"
 import { getExamQuestions } from "@/utils"
-import { Spinner } from "@chakra-ui/react"
+import { Button, Spinner } from "@chakra-ui/react"
 import { useQuery } from "@tanstack/react-query"
 
 type PageProps = {
@@ -14,6 +18,8 @@ type PageProps = {
 }
 
 const page = ({ params: { examId, user } }: PageProps) => {
+  const [score, setScore] = useState(0)
+
   const { data, isLoading, isError } = useQuery({
     queryFn: () => getExamQuestions(examId),
     queryKey: ["questions"],
@@ -40,7 +46,19 @@ const page = ({ params: { examId, user } }: PageProps) => {
         </div>
       )
     } else if (user === "users") {
-      return "welcome"
+      return (
+        <div className="p-4 flex-1 cut-viewport-height overflow-y-scroll">
+          {data.questions.map((question, i) => (
+            <ExamQuestion
+              idx={i}
+              question={question}
+              key={i}
+              setScore={setScore}
+            />
+          ))}
+          <Button variant="outline">تسليم</Button>
+        </div>
+      )
     }
   }
 }

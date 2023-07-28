@@ -450,8 +450,10 @@ export const checkAnswer = async ({
     `${api}/questions/${questionId}/check`,
     {
       method: "POST",
+      body: JSON.stringify({
+        answer,
+      }),
       credentials: "include",
-      body: JSON.stringify(answer),
       headers: {
         "Content-type": "application/json",
       },

@@ -48,4 +48,4 @@ export const skillsContent = [
   },
 ]
 
-export const ABC = ["a", "b", "c"]
+export const ABC: ["a", "b", "c"] = ["a", "b", "c"]
