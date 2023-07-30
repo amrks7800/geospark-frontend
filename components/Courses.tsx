@@ -3,11 +3,15 @@
 import { SimpleGrid } from "@chakra-ui/react"
 import ProjectCard from "./ProjectCard"
 import { useQuery } from "@tanstack/react-query"
-import { getAllCourses } from "@/utils"
+import { getAllCourses, getCurrentUser } from "@/utils"
 
 const Courses = () => {
   const { data: courses, isLoading } = useQuery({
     queryFn: getAllCourses,
+    queryKey: ["course"],
+  })
+  const { data: user } = useQuery({
+    queryFn: getCurrentUser,
     queryKey: ["course"],
   })
 
@@ -22,7 +26,11 @@ const Courses = () => {
           <ProjectCard course={course} key={i} />
         ))
       ) : (
-        <h1>أضف الكورس الاول 😍👌.</h1>
+        <h1>
+          {user?.isAdmin
+            ? "أضف الكورس الاول 😍👌."
+            : "انتظر من فضلك"}
+        </h1>
       )}
     </SimpleGrid>
   )

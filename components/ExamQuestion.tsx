@@ -6,7 +6,7 @@ import {
   Stack,
   Divider,
 } from "@chakra-ui/react"
-import { useState, Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction } from "react"
 import { Question } from "@/types"
 import { useMutation } from "@tanstack/react-query"
 import { checkAnswer } from "@/utils"

@@ -1,14 +1,15 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import {
   AddQuestionModal,
   ExamQuestion,
 } from "@/components"
 import CustomAccordion from "@/components/Accordion"
-import { getExamQuestions } from "@/utils"
+import { getCurrentUser, getExamQuestions } from "@/utils"
 import { Button, Spinner } from "@chakra-ui/react"
 import { useQuery } from "@tanstack/react-query"
+import ShowScoreModal from "@/components/ShowScoreModel"
 
 type PageProps = {
   params: {
@@ -23,6 +24,9 @@ const page = ({ params: { examId, user } }: PageProps) => {
   const { data, isLoading, isError } = useQuery({
     queryFn: () => getExamQuestions(examId),
     queryKey: ["questions"],
+  })
+  const { data: currentUser } = useQuery({
+    queryFn: getCurrentUser,
   })
 
   if (isLoading)
@@ -56,7 +60,14 @@ const page = ({ params: { examId, user } }: PageProps) => {
               setScore={setScore}
             />
           ))}
-          <Button variant="outline">تسليم</Button>
+          {!!currentUser && (
+            <ShowScoreModal
+              score={score}
+              examId={examId}
+              userId={currentUser.id}
+              questions={data.questions.length}
+            />
+          )}
         </div>
       )
     }

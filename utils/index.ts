@@ -17,6 +17,7 @@ import {
   AddQuestionToExamProps,
   Question,
   ExamQuestionsResponse,
+  AddUserResultProps,
 } from "@/types"
 import { toast } from "react-toastify"
 
@@ -514,6 +515,36 @@ export const getExamQuestions = async (
     `${api}/exams/${examId}/questions`,
     {
       credentials: "include",
+    }
+  )
+
+  if (!request.ok) {
+    handleErrorMiddleware(request.status)
+  }
+
+  const response = await request.json()
+
+  return response
+}
+
+export const addUserResultByExamId = async ({
+  examId,
+  userId,
+  score,
+}: AddUserResultProps): Promise<{ message: string }> => {
+  const request = await fetch(
+    `${api}/exams/${examId}/result`,
+    {
+      method: "POST",
+      body: JSON.stringify({
+        score,
+        userId,
+        examId,
+      }),
+      credentials: "include",
+      headers: {
+        "Content-type": "application/json",
+      },
     }
   )
 

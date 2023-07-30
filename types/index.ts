@@ -198,3 +198,16 @@ export interface Result {
   userId: string
   examId: string
 }
+
+export interface ShowScoreModalProps {
+  score: number
+  questions: number
+  examId: string
+  userId: string
+}
+
+export interface AddUserResultProps {
+  userId: string
+  examId: string
+  score: number
+}
