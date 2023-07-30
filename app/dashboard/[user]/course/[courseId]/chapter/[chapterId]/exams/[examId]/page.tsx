@@ -10,6 +10,7 @@ import { getCurrentUser, getExamQuestions } from "@/utils"
 import { Button, Spinner } from "@chakra-ui/react"
 import { useQuery } from "@tanstack/react-query"
 import ShowScoreModal from "@/components/ShowScoreModel"
+import { AiFillInfoCircle } from "react-icons/ai"
 
 type PageProps = {
   params: {
@@ -27,6 +28,7 @@ const page = ({ params: { examId, user } }: PageProps) => {
   })
   const { data: currentUser } = useQuery({
     queryFn: getCurrentUser,
+    queryKey: ["user"],
   })
 
   if (isLoading)
@@ -52,6 +54,12 @@ const page = ({ params: { examId, user } }: PageProps) => {
     } else if (user === "users") {
       return (
         <div className="p-4 flex-1 cut-viewport-height overflow-y-scroll">
+          <p className="w-fit mx-auto flex items-center gap-2 mb-5">
+            <AiFillInfoCircle size={18} color={"#4E4FEB"} />
+            <span className="text-[#777] text-xl">
+              يرجي العلم انه يتم احتساب اول اجابة فقط
+            </span>
+          </p>
           {data.questions.map((question, i) => (
             <ExamQuestion
               idx={i}

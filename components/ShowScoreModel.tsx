@@ -52,7 +52,7 @@ const ShowScoreModal = ({
             لقد احرزت
           </ModalHeader>
           <ModalBody>
-            <h1 className="text-5xl text-primary-blue font-bold mb-5">
+            <h1 className="text-5xl text-primary-blue font-bold mb-5 w-fit mx-auto">
               {score}/{questions}
             </h1>
             <p
