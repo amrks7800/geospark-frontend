@@ -53,6 +53,25 @@ export function ExamQuestion({
     },
   })
 
+  const handleClick = () => {
+    if (answer !== "") {
+      mutation.mutate({
+        questionId: question.id,
+        answer,
+      })
+      setCurrentQuestion(prev => {
+        if (prev + 1 !== length) {
+          return prev + 1
+        }
+        return prev
+      })
+    } else {
+      toast("قم باختيار اجابة من فضلك", {
+        type: "info",
+      })
+    }
+  }
+
   return (
     <div className="my-8" key={idx}>
       <p className="text-[#2F2D51] text-lg font-semibold my-2">
@@ -85,26 +104,9 @@ export function ExamQuestion({
       <Button
         variant="outline"
         className="mx-auto block border-primary-blue text-primary-blue my-3"
-        onClick={() => {
-          if (answer !== "") {
-            mutation.mutate({
-              questionId: question.id,
-              answer,
-            })
-            setCurrentQuestion(prev => {
-              if (prev + 1 !== length) {
-                return prev + 1
-              }
-              return prev
-            })
-          } else {
-            toast("قم باختيار اجابة من فضلك", {
-              type: "info",
-            })
-          }
-        }}
+        onClick={handleClick}
       >
-        التالي
+        {idx + 1 !== length ? "التالي" : "انهاء"}
       </Button>
 
       <Divider className="mt-5" />
