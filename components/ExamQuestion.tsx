@@ -38,7 +38,12 @@ export function ExamQuestion({
     onSuccess: data => {
       console.log(data.isCorrect)
       if (data.isCorrect) {
-        setScore(prev => prev + 1)
+        setScore(prev => {
+          if (prev !== length) {
+            return prev + 1
+          }
+          return prev
+        })
       }
     },
     onError() {
@@ -49,7 +54,7 @@ export function ExamQuestion({
   })
 
   return (
-    <div className="my-8">
+    <div className="my-8" key={idx}>
       <p className="text-[#2F2D51] text-lg font-semibold my-2">
         {++idx}-{question.question}
       </p>
