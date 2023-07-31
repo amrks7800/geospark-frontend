@@ -42,7 +42,7 @@ const ShowScoreModal = ({
         className="mx-auto block border-primary-blue text-primary-blue"
         onClick={onOpen}
       >
-        تسليم
+        اظهار النتيجة
       </Button>
 
       <Modal isOpen={isOpen} onClose={onClose}>
@@ -62,10 +62,10 @@ const ShowScoreModal = ({
                   : "text-red-600 text-xl w-fit mx-auto"
               }
             >
-              {score >= middlePoint
-                ? "اجتياز 👍"
-                : score === questions
+              {score === questions
                 ? "ممتاز 🙌💖✔"
+                : score >= middlePoint
+                ? "اجتياز 👍"
                 : "رسوب 😢"}
             </p>
           </ModalBody>

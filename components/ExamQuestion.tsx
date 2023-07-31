@@ -1,12 +1,13 @@
 "use client"
 
 import {
+  Button,
+  Divider,
   Radio,
   RadioGroup,
   Stack,
-  Divider,
 } from "@chakra-ui/react"
-import { Dispatch, SetStateAction } from "react"
+import { Dispatch, SetStateAction, useState } from "react"
 import { Question } from "@/types"
 import { useMutation } from "@tanstack/react-query"
 import { checkAnswer } from "@/utils"
@@ -19,13 +20,19 @@ type ExamQuestionProps = {
   >
   idx: number
   setScore: Dispatch<SetStateAction<number>>
+  setCurrentQuestion: Dispatch<SetStateAction<number>>
+  length: number
 }
 
 export function ExamQuestion({
   question,
   idx,
   setScore,
+  setCurrentQuestion,
+  length,
 }: ExamQuestionProps) {
+  const [answer, setAnswer] = useState("")
+
   const mutation = useMutation({
     mutationFn: checkAnswer,
     onSuccess: data => {
@@ -48,10 +55,7 @@ export function ExamQuestion({
       </p>
       <RadioGroup
         onChange={e => {
-          mutation.mutate({
-            questionId: question.id,
-            answer: e,
-          })
+          setAnswer(e)
         }}
       >
         <Stack direction="column" spacing="1">
@@ -72,6 +76,27 @@ export function ExamQuestion({
           </div>
         </Stack>
       </RadioGroup>
+      {++idx !== length && (
+        <Button
+          variant="outline"
+          className="mx-auto block border-primary-blue text-primary-blue my-3"
+          onClick={() => {
+            if (answer !== "") {
+              mutation.mutate({
+                questionId: question.id,
+                answer,
+              })
+              setCurrentQuestion(prev => prev + 1)
+            } else {
+              toast("قم باختيار اجابة من فضلك", {
+                type: "info",
+              })
+            }
+          }}
+        >
+          التالي
+        </Button>
+      )}
       <Divider className="mt-5" />
     </div>
   )

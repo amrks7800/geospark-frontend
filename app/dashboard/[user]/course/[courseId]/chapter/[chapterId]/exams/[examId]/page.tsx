@@ -7,7 +7,7 @@ import {
 } from "@/components"
 import CustomAccordion from "@/components/Accordion"
 import { getCurrentUser, getExamQuestions } from "@/utils"
-import { Button, Spinner } from "@chakra-ui/react"
+import { Button, Divider, Spinner } from "@chakra-ui/react"
 import { useQuery } from "@tanstack/react-query"
 import ShowScoreModal from "@/components/ShowScoreModel"
 import { AiFillInfoCircle } from "react-icons/ai"
@@ -21,6 +21,7 @@ type PageProps = {
 
 const page = ({ params: { examId, user } }: PageProps) => {
   const [score, setScore] = useState(0)
+  const [currentQuestion, setCurrentQuestion] = useState(0)
 
   const { data, isLoading, isError } = useQuery({
     queryFn: () => getExamQuestions(examId),
@@ -60,22 +61,25 @@ const page = ({ params: { examId, user } }: PageProps) => {
               يرجي العلم انه يتم احتساب اول اجابة فقط
             </span>
           </p>
-          {data.questions.map((question, i) => (
-            <ExamQuestion
-              idx={i}
-              question={question}
-              key={i}
-              setScore={setScore}
-            />
-          ))}
-          {!!currentUser && (
-            <ShowScoreModal
-              score={score}
-              examId={examId}
-              userId={currentUser.id}
-              questions={data.questions.length}
-            />
-          )}
+
+          <ExamQuestion
+            idx={currentQuestion}
+            question={data.questions[currentQuestion]}
+            setScore={setScore}
+            setCurrentQuestion={setCurrentQuestion}
+            length={data.questions.length}
+          />
+
+          {!!currentUser &&
+            currentQuestion !==
+              data.questions.length - 1 && (
+              <ShowScoreModal
+                score={score}
+                examId={examId}
+                userId={currentUser.id}
+                questions={data.questions.length}
+              />
+            )}
         </div>
       )
     }
