@@ -63,12 +63,10 @@ const ShowScoreModal = ({
               }
             >
               {score >= middlePoint
-                ? "اجتياز"
-                : score >= questions - 3
-                ? "جيد جدا 😊"
+                ? "اجتياز 👍"
                 : score === questions
                 ? "ممتاز 🙌💖✔"
-                : "رسوب"}
+                : "رسوب 😢"}
             </p>
           </ModalBody>
 
