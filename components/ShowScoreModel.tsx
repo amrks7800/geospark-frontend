@@ -21,6 +21,7 @@ const ShowScoreModal = ({
   questions,
   userId,
   examId,
+  current,
 }: ShowScoreModalProps) => {
   const { isOpen, onOpen, onClose } = useDisclosure()
   const router = useRouter()
@@ -37,13 +38,15 @@ const ShowScoreModal = ({
 
   return (
     <>
-      <Button
-        variant="outline"
-        className="mx-auto block border-primary-blue text-primary-blue"
-        onClick={onOpen}
-      >
-        اظهار النتيجة
-      </Button>
+      {current === questions && (
+        <Button
+          variant="outline"
+          className="mx-auto block border-primary-blue text-primary-blue"
+          onClick={onOpen}
+        >
+          اظهار النتيجة
+        </Button>
+      )}
 
       <Modal isOpen={isOpen} onClose={onClose}>
         <ModalOverlay />

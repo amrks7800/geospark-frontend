@@ -204,6 +204,7 @@ export interface ShowScoreModalProps {
   questions: number
   examId: string
   userId: string
+  current: number
 }
 
 export interface AddUserResultProps {

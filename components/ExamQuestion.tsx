@@ -76,27 +76,32 @@ export function ExamQuestion({
           </div>
         </Stack>
       </RadioGroup>
-      {++idx !== length && (
-        <Button
-          variant="outline"
-          className="mx-auto block border-primary-blue text-primary-blue my-3"
-          onClick={() => {
-            if (answer !== "") {
-              mutation.mutate({
-                questionId: question.id,
-                answer,
-              })
-              setCurrentQuestion(prev => prev + 1)
-            } else {
-              toast("قم باختيار اجابة من فضلك", {
-                type: "info",
-              })
-            }
-          }}
-        >
-          التالي
-        </Button>
-      )}
+
+      <Button
+        variant="outline"
+        className="mx-auto block border-primary-blue text-primary-blue my-3"
+        onClick={() => {
+          if (answer !== "") {
+            mutation.mutate({
+              questionId: question.id,
+              answer,
+            })
+            setCurrentQuestion(prev => {
+              if (prev + 1 !== length) {
+                return prev + 1
+              }
+              return prev
+            })
+          } else {
+            toast("قم باختيار اجابة من فضلك", {
+              type: "info",
+            })
+          }
+        }}
+      >
+        التالي
+      </Button>
+
       <Divider className="mt-5" />
     </div>
   )

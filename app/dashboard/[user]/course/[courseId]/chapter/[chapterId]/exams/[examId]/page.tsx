@@ -7,7 +7,7 @@ import {
 } from "@/components"
 import CustomAccordion from "@/components/Accordion"
 import { getCurrentUser, getExamQuestions } from "@/utils"
-import { Button, Divider, Spinner } from "@chakra-ui/react"
+import { Spinner } from "@chakra-ui/react"
 import { useQuery } from "@tanstack/react-query"
 import ShowScoreModal from "@/components/ShowScoreModel"
 import { AiFillInfoCircle } from "react-icons/ai"
@@ -70,16 +70,15 @@ const page = ({ params: { examId, user } }: PageProps) => {
             length={data.questions.length}
           />
 
-          {!!currentUser &&
-            currentQuestion !==
-              data.questions.length - 1 && (
-              <ShowScoreModal
-                score={score}
-                examId={examId}
-                userId={currentUser.id}
-                questions={data.questions.length}
-              />
-            )}
+          {!!currentUser && (
+            <ShowScoreModal
+              current={currentQuestion + 1}
+              score={score}
+              examId={examId}
+              userId={currentUser.id}
+              questions={data.questions.length}
+            />
+          )}
         </div>
       )
     }
