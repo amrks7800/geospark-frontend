@@ -45,6 +45,8 @@ export function ExamQuestion({
           return prev
         })
       }
+
+      // change the question after success
       setCurrentQuestion(prev => {
         if (prev + 1 !== length) {
           return prev + 1
