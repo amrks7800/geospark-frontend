@@ -63,7 +63,7 @@ const page = ({ params: { examId, user } }: PageProps) => {
           </p>
 
           <ExamQuestion
-            idx={currentQuestion}
+            currentQuestion={currentQuestion}
             question={data.questions[currentQuestion]}
             setScore={setScore}
             setCurrentQuestion={setCurrentQuestion}

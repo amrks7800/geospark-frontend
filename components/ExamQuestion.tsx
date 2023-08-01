@@ -18,7 +18,7 @@ type ExamQuestionProps = {
     Question,
     "id" | "question" | "option1" | "option2" | "option3"
   >
-  idx: number
+  currentQuestion: number
   setScore: Dispatch<SetStateAction<number>>
   setCurrentQuestion: Dispatch<SetStateAction<number>>
   length: number
@@ -26,7 +26,7 @@ type ExamQuestionProps = {
 
 export function ExamQuestion({
   question,
-  idx,
+  currentQuestion,
   setScore,
   setCurrentQuestion,
   length,
@@ -45,6 +45,12 @@ export function ExamQuestion({
           return prev
         })
       }
+      setCurrentQuestion(prev => {
+        if (prev + 1 !== length) {
+          return prev + 1
+        }
+        return prev
+      })
     },
     onError() {
       toast("حدث خطأ اختر من جديد", {
@@ -59,12 +65,6 @@ export function ExamQuestion({
         questionId: question.id,
         answer,
       })
-      setCurrentQuestion(prev => {
-        if (prev + 1 !== length) {
-          return prev + 1
-        }
-        return prev
-      })
     } else {
       toast("قم باختيار اجابة من فضلك", {
         type: "info",
@@ -73,9 +73,9 @@ export function ExamQuestion({
   }
 
   return (
-    <div className="my-8" key={idx}>
+    <div className="my-8" key={currentQuestion}>
       <p className="text-[#2F2D51] text-lg font-semibold my-2">
-        {++idx}-{question.question}
+        {++currentQuestion}-{question.question}
       </p>
       <RadioGroup
         onChange={e => {
@@ -106,7 +106,7 @@ export function ExamQuestion({
         className="mx-auto block border-primary-blue text-primary-blue my-3"
         onClick={handleClick}
       >
-        {idx + 1 !== length ? "التالي" : "انهاء"}
+        التالي
       </Button>
 
       <Divider className="mt-5" />

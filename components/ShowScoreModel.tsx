@@ -38,7 +38,7 @@ const ShowScoreModal = ({
 
   return (
     <>
-      {current === questions && (
+      {current === questions ? (
         <Button
           variant="outline"
           className="mx-auto block border-primary-blue text-primary-blue"
@@ -46,6 +46,8 @@ const ShowScoreModal = ({
         >
           اظهار النتيجة
         </Button>
+      ) : (
+        ""
       )}
 
       <Modal isOpen={isOpen} onClose={onClose}>
