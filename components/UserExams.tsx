@@ -49,19 +49,19 @@ const UserExams = ({
               <MenuList>
                 {data?.exams &&
                   data.exams.map((exam, i) => (
-                    <MenuItem
-                      key={i}
-                      _hover={{
-                        backgroundColor:
-                          "rgb(241, 245, 249)",
-                      }}
+                    <Link
+                      href={`${pathname}/exams/${exam.id}`}
                     >
-                      <Link
-                        href={`${pathname}/exams/${exam.id}`}
+                      <MenuItem
+                        key={i}
+                        _hover={{
+                          backgroundColor:
+                            "rgb(241, 245, 249)",
+                        }}
                       >
                         {exam.title}
-                      </Link>
-                    </MenuItem>
+                      </MenuItem>
+                    </Link>
                   ))}
               </MenuList>
             ) : (

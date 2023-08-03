@@ -10,7 +10,7 @@ const Hero = () => {
     bg-white rounded-xl p-2"
     >
       <div className="flex-1 self-center max-sm:text-center">
-        <h1 className="text-3xl sm:text-6xl text-[#2F2D51]">
+        <h1 className="text-3xl sm:text-6xl text-[#2F2D51] max-sm:mt-5">
           اتعلم جيولوجيا
           <span className="font-bold ms-2">صح </span>
         </h1>
@@ -30,7 +30,7 @@ const Hero = () => {
           alt="mister"
           width={300}
           height={600}
-          className="drop-shadow-main md:w-[300px] md:h-[450px] w-[95vw] max-md:mx-auto"
+          className="drop-shadow-main md:w-[300px] md:h-[450px] max-md:mx-auto"
         />
       </div>
       <Link

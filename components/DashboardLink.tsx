@@ -49,7 +49,7 @@ const DashboardLink = ({
         setNavLinks(callback)
       }}
       key={id}
-      href={{ pathname: href }}
+      href={href}
       className={`w-full py-2 text-lg font-semibold text-primary-blue px-3 flex items-center gap-2 ${
         activeIdx === id
           ? "bg-slate-100 border-e-4 border-solid border-primary-blue"

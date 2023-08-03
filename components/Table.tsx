@@ -15,7 +15,7 @@ import { BiTrash } from "react-icons/bi"
 import { toast } from "react-toastify"
 
 const Table = ({ headers, items, type }: TableProps) => {
-  if (items.length) {
+  if (items?.length) {
     return (
       <table className="border border-primary-blue border-spacing-0 rounded-lg">
         <thead>

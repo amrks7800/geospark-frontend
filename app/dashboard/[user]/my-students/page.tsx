@@ -11,7 +11,7 @@ import {
 import { BsFillGeoFill } from "react-icons/bs"
 
 export default function Page() {
-  const { data, error, isLoading } = useQuery({
+  const { data, isLoading } = useQuery({
     queryFn: getAllUsers,
     queryKey: ["user"],
   })
