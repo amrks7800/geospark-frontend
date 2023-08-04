@@ -110,7 +110,7 @@ const ChakraTable = ({
                 <Tr key={item.id}>
                   <Td>{item.exam_title}</Td>
 
-                  <Td>{item.score}</Td>
+                  <Td>{item.user_score}</Td>
                 </Tr>
               ))}
             </Tbody>
