@@ -10,7 +10,7 @@ import {
   Td,
   TableContainer,
 } from "@chakra-ui/react"
-import { Exam } from "@/types"
+import { Exam, Result } from "@/types"
 import { BiTrash } from "react-icons/bi"
 import {
   useMutation,
@@ -23,10 +23,16 @@ import Link from "next/link"
 
 type ChakraTableProps = {
   headers: (string | ReactNode)[]
-} & {
-  type: "exams"
-  bodyItem: Exam[]
-}
+} & (
+  | {
+      type: "exams"
+      bodyItem: Exam[]
+    }
+  | {
+      type: "results"
+      bodyItem: Result[]
+    }
+)
 
 const ChakraTable = ({
   headers,
@@ -72,31 +78,43 @@ const ChakraTable = ({
               ))}
             </Tr>
           </Thead>
-          <Tbody>
-            {bodyItem.map((exam, i) => (
-              <Tr key={exam.id}>
-                <Td>
-                  <Link
-                    href={`${pathname}/exams/${exam.id}`}
-                    className="hover:underline"
-                  >
-                    {exam.title}
-                  </Link>
-                </Td>
-                <Td>{i + 1}</Td>
-                <Td>
-                  <BiTrash
-                    size={25}
-                    color="red"
-                    className="cursor-pointer"
-                    onClick={() => {
-                      deleteExamMutation.mutate(exam.id)
-                    }}
-                  />
-                </Td>
-              </Tr>
-            ))}
-          </Tbody>
+          {type === "exams" ? (
+            <Tbody>
+              {bodyItem.map((item, i) => (
+                <Tr key={item.id}>
+                  <Td>
+                    <Link
+                      href={`${pathname}/exams/${item.id}`}
+                      className="hover:underline"
+                    >
+                      {item.title}
+                    </Link>
+                  </Td>
+                  <Td>{i + 1}</Td>
+                  <Td>
+                    <BiTrash
+                      size={25}
+                      color="red"
+                      className="cursor-pointer"
+                      onClick={() => {
+                        deleteExamMutation.mutate(item.id)
+                      }}
+                    />
+                  </Td>
+                </Tr>
+              ))}
+            </Tbody>
+          ) : (
+            <Tbody>
+              {bodyItem.map((item, i) => (
+                <Tr key={item.id}>
+                  <Td>{item.exam_title}</Td>
+
+                  <Td>{item.score}</Td>
+                </Tr>
+              ))}
+            </Tbody>
+          )}
         </Table>
       </TableContainer>
     )

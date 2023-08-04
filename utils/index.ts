@@ -19,6 +19,7 @@ import {
   ExamQuestionsResponse,
   AddUserResultProps,
   User,
+  Result,
 } from "@/types"
 import { toast } from "react-toastify"
 
@@ -562,6 +563,25 @@ export const addUserResultByExamId = async ({
       headers: {
         "Content-type": "application/json",
       },
+    }
+  )
+
+  if (!request.ok) {
+    handleErrorMiddleware(request.status)
+  }
+
+  const response = await request.json()
+
+  return response
+}
+
+export const getUserResultById = async (
+  userId: string
+): Promise<Result[]> => {
+  const request = await fetch(
+    `${api}/users/${userId}/results`,
+    {
+      credentials: "include",
     }
   )
 

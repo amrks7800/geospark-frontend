@@ -212,3 +212,11 @@ export interface AddUserResultProps {
   examId: string
   score: number
 }
+
+export interface Result {
+  result_id: string
+  exam_id: string
+  exam_title: string
+  user_name: string
+  user_score: string
+}
