@@ -1,3 +1,5 @@
+"use client"
+
 import { ChakraTable } from "@/components"
 import { getUserResultById } from "@/utils"
 import { useQuery } from "@tanstack/react-query"
