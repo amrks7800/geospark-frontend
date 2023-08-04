@@ -18,6 +18,7 @@ import {
   Question,
   ExamQuestionsResponse,
   AddUserResultProps,
+  User,
 } from "@/types"
 import { toast } from "react-toastify"
 
@@ -142,6 +143,22 @@ export const getAllUsers =
 
     return response
   }
+
+export const getUserDataById = async (
+  userId: string
+): Promise<User> => {
+  const request = await fetch(`${api}/Allusers/${userId}`, {
+    credentials: "include",
+  })
+
+  if (!request.ok) {
+    handleErrorMiddleware(request.status)
+  }
+
+  const response = await request.json()
+
+  return response
+}
 
 export const deleteUser = async (id: string) => {
   const request = await fetch(`${api}/deleteUser/${id}`, {

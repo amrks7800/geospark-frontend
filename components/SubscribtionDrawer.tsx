@@ -10,8 +10,8 @@ import {
   DrawerCloseButton,
   Button,
   useDisclosure,
+  Input,
 } from "@chakra-ui/react"
-import { Input } from "@chakra-ui/react"
 
 export default function SubscriptionDrawer() {
   const { isOpen, onOpen, onClose } = useDisclosure()

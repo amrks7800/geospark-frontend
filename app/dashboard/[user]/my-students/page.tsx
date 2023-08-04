@@ -35,6 +35,10 @@ export default function Page() {
                   <BsFillGeoFill size={25} />
                   الحالة
                 </div>,
+                <div className="flex items-center gap-1">
+                  <BsFillGeoFill size={25} />
+                  النتائج
+                </div>,
               ]}
               items={data?.users}
               type="users"

@@ -10,11 +10,7 @@ import {
   UserExams,
   VideoPlayer,
 } from "@/components"
-import {
-  getChapterExams,
-  getChapterVideos,
-  getExam,
-} from "@/utils"
+import { getChapterExams, getChapterVideos } from "@/utils"
 import { Button } from "@chakra-ui/react"
 import { useQuery } from "@tanstack/react-query"
 import {
@@ -26,6 +22,7 @@ import { useEffect, useState } from "react"
 import { MdOutlineSubtitles } from "react-icons/md"
 import { BiLinkAlt } from "react-icons/bi"
 import { useProgressStore } from "@/store"
+import { toast } from "react-toastify"
 
 type PageProps = {
   params: {
@@ -46,10 +43,16 @@ const Page = ({ params }: PageProps) => {
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  const { data: videosResult } = useQuery({
+  const { data: videosResult, error } = useQuery({
     queryFn: () => getChapterVideos(params.chapterId),
     queryKey: ["video"],
   })
+
+  useEffect(() => {
+    if (error) {
+      toast("انت غير مشترك", { type: "error" })
+    }
+  }, [error])
 
   const progressPercentage = useMemo(() => {
     if (videosResult?.videos.length) {

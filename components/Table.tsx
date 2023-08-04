@@ -13,6 +13,8 @@ import {
 } from "@/utils"
 import { BiTrash } from "react-icons/bi"
 import { toast } from "react-toastify"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 
 const Table = ({ headers, items, type }: TableProps) => {
   if (items?.length) {
@@ -114,12 +116,20 @@ const UserTr = ({ user }: { user: User }) => {
       id: user.id!,
     })
   }, [checked])
+
+  const pathname = usePathname()
+
   return (
     <tr>
       <BodyCell>{`${user.firstName} ${user.lastName}`}</BodyCell>
       <BodyCell>{user.email}</BodyCell>
       <BodyCell>
         {user.subscribed ? "مشترك" : "غير مشترك"}
+      </BodyCell>
+      <BodyCell>
+        <Link href={`${pathname}/results/${user.id}`}>
+          عرض جميع النتائج
+        </Link>
       </BodyCell>
       <BodyCell isEmpty>
         <div className="flex justify-between items-center">
