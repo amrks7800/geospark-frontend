@@ -100,16 +100,18 @@ const Navbar = () => {
             onOpen={onOpen!}
             isOpen={isOpen!}
             withButton
-            hidden={!data?.subscribed}
+            hidden={!!data?.subscribed || !!data?.isAdmin}
           />
         </div>
-        <div className="md:hidden inline">
-          <NavMenu
-            data={data}
+        <div className="md:hidden flex items-center gap-2">
+          <SubscriptionDrawer
             onClose={onClose!}
             onOpen={onOpen!}
             isOpen={isOpen!}
+            withButton
+            hidden={!!data?.subscribed || !!data?.isAdmin}
           />
+          <NavMenu data={data} />
         </div>
       </div>
     </header>

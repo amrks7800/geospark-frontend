@@ -4,28 +4,22 @@ import {
   Menu,
   MenuButton,
   MenuList,
+  MenuItem,
   Button,
   Avatar,
+  Box,
 } from "@chakra-ui/react"
 import { GiHamburgerMenu } from "react-icons/gi"
-import SubscriptionDrawer from "./SubscribtionDrawer"
 import { NavLink } from "./NavLink"
 import { usePathname } from "next/navigation"
 import { CurrentUserResponse } from "@/types"
+import React from "react"
 
 type MenuProps = {
   data: CurrentUserResponse | undefined
-  isOpen: boolean
-  onOpen: () => void
-  onClose: () => void
 }
 
-const NavMenu = ({
-  data,
-  isOpen,
-  onClose,
-  onOpen,
-}: MenuProps) => {
+const NavMenu = ({ data }: MenuProps) => {
   const pathname = usePathname()
   return (
     <Menu>
@@ -47,7 +41,7 @@ const NavMenu = ({
         position={"relative"}
         zIndex={500}
       >
-        <div className="items-center justify-center gap-8 w-fit md:flex hidden">
+        <MenuItem>
           <NavLink
             href="/signin"
             title="تسجيل الدخول"
@@ -58,6 +52,9 @@ const NavMenu = ({
               pathname.includes("signin")
             }
           />
+        </MenuItem>
+
+        <MenuItem>
           <NavLink
             href="/signup"
             title="التسجيل"
@@ -68,7 +65,9 @@ const NavMenu = ({
               pathname.includes("signin")
             }
           />
+        </MenuItem>
 
+        <MenuItem>
           <NavLink
             href={
               !!data?.isAdmin
@@ -84,7 +83,9 @@ const NavMenu = ({
               pathname.includes("signin")
             }
           />
+        </MenuItem>
 
+        <MenuItem>
           <h1
             className="text-xl font-bold text-primary-blue flex items-center gap-2 me-2"
             hidden={!pathname.includes("dashboard")}
@@ -95,15 +96,7 @@ const NavMenu = ({
 
             <span className="sm:block hidden">{`${data?.firstName} ${data?.lastName}`}</span>
           </h1>
-
-          <SubscriptionDrawer
-            onClose={onClose!}
-            onOpen={onOpen!}
-            isOpen={isOpen!}
-            withButton
-            hidden={!data?.subscribed}
-          />
-        </div>
+        </MenuItem>
       </MenuList>
     </Menu>
   )
