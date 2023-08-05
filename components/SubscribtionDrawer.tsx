@@ -9,18 +9,36 @@ import {
   DrawerContent,
   DrawerCloseButton,
   Button,
-  useDisclosure,
   Input,
 } from "@chakra-ui/react"
+import { default as CustomButton } from "./Button"
+import { useRef } from "react"
+import { toast } from "react-toastify"
 
-export default function SubscriptionDrawer() {
-  const { isOpen, onOpen, onClose } = useDisclosure()
+type DrawerProps = {
+  isOpen: boolean
+  onOpen: () => void
+  onClose: () => void
+  withButton: boolean
+} & React.HTMLAttributes<HTMLDivElement>
 
+export default function SubscriptionDrawer({
+  isOpen,
+  onOpen,
+  onClose,
+  withButton,
+  hidden,
+}: DrawerProps) {
+  const phoneRef = useRef<HTMLSpanElement>(null)
   return (
-    <>
-      <Button colorScheme="teal" onClick={onOpen}>
-        Open
-      </Button>
+    <div className="w-fit" hidden={hidden}>
+      {withButton && (
+        <CustomButton
+          text="اشترك"
+          style="font-bold px-5 py-4 rounded-lg w-[150px]"
+          onClick={onOpen}
+        />
+      )}
       <Drawer
         isOpen={isOpen}
         placement="left"
@@ -28,27 +46,66 @@ export default function SubscriptionDrawer() {
       >
         <DrawerOverlay />
         <DrawerContent>
-          <DrawerCloseButton />
-          <DrawerHeader className="ps-16" dir="rtl">
-            Create your account
-          </DrawerHeader>
+          <div className="flex items-center gap-5 height-24 border-b border-solid border-[#777]">
+            <DrawerCloseButton className="static" />
+            <DrawerHeader
+              className=" text-primary-blue flex-1"
+              dir="rtl"
+            >
+              اشترك معنا
+            </DrawerHeader>
+          </div>
 
           <DrawerBody>
-            <Input placeholder="Type here..." />
+            <p className="text-[#2F2D51] text-xl leading-10 font-semibold">
+              للأشتراك في المنصة ابعت 60 جنية فقط عن طريق
+              فودافون كاش ع الرقم ده{" "}
+              <span
+                className="text-primary-blue font-bold"
+                ref={phoneRef}
+              >
+                01004499596
+              </span>{" "}
+              <button
+                className="p-2 bg-indigo-700 text-white mx-2 rounded-lg"
+                onClick={() => {
+                  if (
+                    phoneRef.current &&
+                    phoneRef.current?.textContent
+                  ) {
+                    navigator.clipboard
+                      .writeText(
+                        phoneRef.current?.textContent
+                      )
+                      .then(() =>
+                        toast("تم نسخ الرقم", {
+                          type: "success",
+                        })
+                      )
+                  }
+                }}
+              >
+                نسخ الرقم
+              </button>
+              بعد متبعت المبلغ خد اسكرين شوت بصوره التحويل
+              وإبعتها للمستر وهيديك صلاحيه تستعمل المنصه لكل
+              الصفوف لمده 30يوم فقط من بداية إرسالك للاشتراك
+              يرجى تسجيل الدخول أولا قبل الدفع ...
+            </p>
           </DrawerBody>
 
           <DrawerFooter>
             <Button
               variant="outline"
+              className="block w-fit mx-auto"
               mr={3}
               onClick={onClose}
             >
-              Cancel
+              تمام
             </Button>
-            <Button colorScheme="blue">Save</Button>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
-    </>
+    </div>
   )
 }

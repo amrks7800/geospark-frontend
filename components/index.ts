@@ -30,6 +30,7 @@ import { ExamQuestion } from "./ExamQuestion"
 import ShowScoreModel from "./ShowScoreModel"
 import SubscriptionDrawer from "./SubscribtionDrawer"
 import Stats from "./Stats"
+import { NavLink } from "./NavLink"
 
 export {
   Providers,
@@ -64,4 +65,5 @@ export {
   ShowScoreModel,
   SubscriptionDrawer,
   Stats,
+  NavLink,
 }

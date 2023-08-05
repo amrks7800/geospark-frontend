@@ -16,9 +16,13 @@ const SocialMediaIcons = () => {
       >
         <AiFillFacebook size={35} color="#1877f2" />
       </Link>
-      <AiFillYoutube size={35} color="#ff0000" />
-      <AiFillLinkedin size={35} color="#0a66c2" />
-      <AiFillInstagram size={35} color="#c13584" />
+      <Link
+        href={"https://youtube.com/@GeologistAhmadFarnwany"}
+      >
+        <AiFillYoutube size={35} color="#ff0000" />
+      </Link>
+      {/* <AiFillLinkedin size={35} color="#0a66c2" />
+      <AiFillInstagram size={35} color="#c13584" /> */}
     </div>
   )
 }

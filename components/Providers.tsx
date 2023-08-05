@@ -12,6 +12,7 @@ import {
 } from "@tanstack/react-query"
 import { ToastContainer } from "react-toastify"
 import "react-toastify/dist/ReactToastify.css"
+import SubscriptionContext from "@/contexts/SubscriptionContext"
 
 const colors = {
   brand: {
@@ -32,12 +33,14 @@ const Providers = ({
 }) => {
   return (
     <QueryClientProvider client={queryClient}>
-      <CacheProvider>
-        <ChakraProvider theme={theme}>
-          {children}
-          <ToastContainer />
-        </ChakraProvider>
-      </CacheProvider>
+      <SubscriptionContext>
+        <CacheProvider>
+          <ChakraProvider theme={theme}>
+            {children}
+            <ToastContainer />
+          </ChakraProvider>
+        </CacheProvider>
+      </SubscriptionContext>
     </QueryClientProvider>
   )
 }

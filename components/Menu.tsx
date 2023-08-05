@@ -1,16 +1,32 @@
 "use client"
 
-import { Link } from "@chakra-ui/next-js"
 import {
   Menu,
   MenuButton,
   MenuList,
-  MenuItem,
   Button,
+  Avatar,
 } from "@chakra-ui/react"
 import { GiHamburgerMenu } from "react-icons/gi"
+import SubscriptionDrawer from "./SubscribtionDrawer"
+import { NavLink } from "./NavLink"
+import { usePathname } from "next/navigation"
+import { CurrentUserResponse } from "@/types"
 
-const NavMenu = () => {
+type MenuProps = {
+  data: CurrentUserResponse | undefined
+  isOpen: boolean
+  onOpen: () => void
+  onClose: () => void
+}
+
+const NavMenu = ({
+  data,
+  isOpen,
+  onClose,
+  onOpen,
+}: MenuProps) => {
+  const pathname = usePathname()
   return (
     <Menu>
       <MenuButton
@@ -31,22 +47,63 @@ const NavMenu = () => {
         position={"relative"}
         zIndex={500}
       >
-        <MenuItem>
-          <Link
+        <div className="items-center justify-center gap-8 w-fit md:flex hidden">
+          <NavLink
             href="/signin"
-            className="py-2 px-3 text-lg text-primary-blue cursor-pointer hover:bg-light-gray w-[200px]"
-          >
-            تسجيل الدخول
-          </Link>
-        </MenuItem>
-        <MenuItem>
-          <Link
+            title="تسجيل الدخول"
+            hidden={
+              pathname.includes("signin") ||
+              pathname.includes("dashboard") ||
+              !!data?.id ||
+              pathname.includes("signin")
+            }
+          />
+          <NavLink
             href="/signup"
-            className="w-full py-2 px-3 text-lg text-primary-blue cursor-pointer hover:bg-light-gray"
+            title="التسجيل"
+            hidden={
+              pathname.includes("signin") ||
+              pathname.includes("dashboard") ||
+              !!data?.id ||
+              pathname.includes("signin")
+            }
+          />
+
+          <NavLink
+            href={
+              !!data?.isAdmin
+                ? "/dashboard/teachers"
+                : "/dashboard/users"
+            }
+            title={
+              !!data?.isAdmin ? "وحدة التحكم" : "الكورسات"
+            }
+            hidden={
+              pathname.includes("signin") ||
+              pathname.includes("dashboard") ||
+              pathname.includes("signin")
+            }
+          />
+
+          <h1
+            className="text-xl font-bold text-primary-blue flex items-center gap-2 me-2"
+            hidden={!pathname.includes("dashboard")}
           >
-            الــتــســجيل
-          </Link>
-        </MenuItem>
+            <Avatar
+              name={`${data?.firstName} ${data?.lastName}`}
+            />
+
+            <span className="sm:block hidden">{`${data?.firstName} ${data?.lastName}`}</span>
+          </h1>
+
+          <SubscriptionDrawer
+            onClose={onClose!}
+            onOpen={onOpen!}
+            isOpen={isOpen!}
+            withButton
+            hidden={!data?.subscribed}
+          />
+        </div>
       </MenuList>
     </Menu>
   )
