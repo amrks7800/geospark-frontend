@@ -1,8 +1,9 @@
 "use client"
 
-import { ChakraTable } from "@/components"
+import { ChakraTable, Stats } from "@/components"
 import { getUserResultById } from "@/utils"
 import { useQuery } from "@tanstack/react-query"
+import { useMemo } from "react"
 import { toast } from "react-toastify"
 
 type PageProps = {
@@ -21,6 +22,12 @@ const page = ({ params: { userId } }: PageProps) => {
     queryKey: ["results"],
   })
 
+  const scoresArray = useMemo(() => {
+    return results?.map(item => item.user_score)
+  }, [results])
+
+  console.log(scoresArray)
+
   if (error) {
     toast("حاول مرة اخري", { type: "error" })
     return "😢"
@@ -33,6 +40,11 @@ const page = ({ params: { userId } }: PageProps) => {
           headers={["الامتحان", "النتيجة"]}
           type="results"
           bodyItem={results}
+        />
+        <Stats
+          stats={
+            scoresArray ? scoresArray : ["not available"]
+          }
         />
       </div>
     )

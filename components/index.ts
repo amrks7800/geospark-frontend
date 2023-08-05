@@ -29,6 +29,7 @@ import UserExams from "./UserExams"
 import { ExamQuestion } from "./ExamQuestion"
 import ShowScoreModel from "./ShowScoreModel"
 import SubscriptionDrawer from "./SubscribtionDrawer"
+import Stats from "./Stats"
 
 export {
   Providers,
@@ -62,4 +63,5 @@ export {
   ExamQuestion,
   ShowScoreModel,
   SubscriptionDrawer,
+  Stats,
 }
