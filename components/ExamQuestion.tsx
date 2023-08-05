@@ -67,6 +67,7 @@ export function ExamQuestion({
         questionId: question.id,
         answer,
       })
+      setAnswer("")
     } else {
       toast("قم باختيار اجابة من فضلك", {
         type: "info",

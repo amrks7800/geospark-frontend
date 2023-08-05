@@ -22,9 +22,11 @@ const Stats = ({ stats }: StatsProps) => {
   )
 
   return (
-    <StatGroup>
+    <StatGroup className="my-5 mx-auto">
       <Stat>
-        <StatLabel>أعلي درجة</StatLabel>
+        <StatLabel className="text-primary-blue">
+          أعلي درجة
+        </StatLabel>
         <StatNumber>
           {Math.max(...statsInNumbers)}
         </StatNumber>
@@ -34,7 +36,9 @@ const Stats = ({ stats }: StatsProps) => {
       </Stat>
 
       <Stat>
-        <StatLabel>اقل درجة</StatLabel>
+        <StatLabel className="text-red-500">
+          اقل درجة
+        </StatLabel>
         <StatNumber>
           {Math.min(...statsInNumbers)}
         </StatNumber>
@@ -45,7 +49,9 @@ const Stats = ({ stats }: StatsProps) => {
       </Stat>
 
       <Stat>
-        <StatLabel>المعدل</StatLabel>
+        <StatLabel className="text-indigo-700">
+          المعدل
+        </StatLabel>
         <StatNumber>
           {scoresSum / statsInNumbers.length}
         </StatNumber>

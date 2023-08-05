@@ -58,7 +58,7 @@ const page = ({ params: { examId, user } }: PageProps) => {
           <p className="w-fit mx-auto flex items-center gap-2 mb-5">
             <AiFillInfoCircle size={18} color={"#4E4FEB"} />
             <span className="text-[#777] text-xl">
-              يرجي العلم انه يتم احتساب اول اجابة فقط
+              يرجي ارسال اجابة اخر سؤال قبل اظهار النتيجة
             </span>
           </p>
 
