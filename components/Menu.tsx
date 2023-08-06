@@ -94,7 +94,7 @@ const NavMenu = ({ data }: MenuProps) => {
               name={`${data?.firstName} ${data?.lastName}`}
             />
 
-            <span className="sm:block hidden">{`${data?.firstName} ${data?.lastName}`}</span>
+            <span className="">{`${data?.firstName} ${data?.lastName}`}</span>
           </h1>
         </MenuItem>
       </MenuList>

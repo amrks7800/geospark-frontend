@@ -46,73 +46,83 @@ const Navbar = () => {
             </h1>
           </Link>
         </div>
-        <div className="items-center justify-center gap-8 w-fit md:flex hidden">
-          <NavLink
-            href="/signin"
-            title="تسجيل الدخول"
-            hidden={
-              pathname.includes("signin") ||
-              pathname.includes("dashboard") ||
-              !!data?.id ||
-              pathname.includes("signin")
-            }
-          />
-          <NavLink
-            href="/signup"
-            title="التسجيل"
-            hidden={
-              pathname.includes("signin") ||
-              pathname.includes("dashboard") ||
-              !!data?.id ||
-              pathname.includes("signin")
-            }
-          />
+        {!isLoading && (
+          <>
+            <div className="items-center justify-center gap-8 w-fit md:flex hidden">
+              <NavLink
+                href="/signin"
+                title="تسجيل الدخول"
+                hidden={
+                  pathname.includes("signin") ||
+                  pathname.includes("dashboard") ||
+                  !!data?.id ||
+                  pathname.includes("signin")
+                }
+              />
+              <NavLink
+                href="/signup"
+                title="التسجيل"
+                hidden={
+                  pathname.includes("signin") ||
+                  pathname.includes("dashboard") ||
+                  !!data?.id ||
+                  pathname.includes("signin")
+                }
+              />
 
-          <NavLink
-            href={
-              !!data?.isAdmin
-                ? "/dashboard/teachers"
-                : "/dashboard/users"
-            }
-            title={
-              !!data?.isAdmin ? "وحدة التحكم" : "الكورسات"
-            }
-            hidden={
-              pathname.includes("signin") ||
-              pathname.includes("dashboard") ||
-              pathname.includes("signin")
-            }
-          />
+              <NavLink
+                href={
+                  !!data?.isAdmin
+                    ? "/dashboard/teachers"
+                    : "/dashboard/users"
+                }
+                title={
+                  !!data?.isAdmin
+                    ? "وحدة التحكم"
+                    : "الكورسات"
+                }
+                hidden={
+                  pathname.includes("signin") ||
+                  pathname.includes("dashboard") ||
+                  pathname.includes("signin")
+                }
+              />
 
-          <h1
-            className="text-xl font-bold text-primary-blue flex items-center gap-2 me-2"
-            hidden={!pathname.includes("dashboard")}
-          >
-            <Avatar
-              name={`${data?.firstName} ${data?.lastName}`}
-            />
+              <h1
+                className="text-xl font-bold text-primary-blue flex items-center gap-2 me-2"
+                hidden={!pathname.includes("dashboard")}
+              >
+                <Avatar
+                  name={`${data?.firstName} ${data?.lastName}`}
+                />
 
-            <span className="sm:block hidden">{`${data?.firstName} ${data?.lastName}`}</span>
-          </h1>
+                <span className="sm:block hidden">{`${data?.firstName} ${data?.lastName}`}</span>
+              </h1>
 
-          <SubscriptionDrawer
-            onClose={onClose!}
-            onOpen={onOpen!}
-            isOpen={isOpen!}
-            withButton
-            hidden={!!data?.subscribed || !!data?.isAdmin}
-          />
-        </div>
-        <div className="md:hidden flex items-center gap-2">
-          <SubscriptionDrawer
-            onClose={onClose!}
-            onOpen={onOpen!}
-            isOpen={isOpen!}
-            withButton
-            hidden={!!data?.subscribed || !!data?.isAdmin}
-          />
-          <NavMenu data={data} />
-        </div>
+              <SubscriptionDrawer
+                onClose={onClose!}
+                onOpen={onOpen!}
+                isOpen={isOpen!}
+                withButton
+                hidden={
+                  !!data?.subscribed || !!data?.isAdmin
+                }
+              />
+            </div>
+            <div className="md:hidden flex items-center gap-2">
+              <SubscriptionDrawer
+                onClose={onClose!}
+                onOpen={onOpen!}
+                isOpen={isOpen!}
+                withButton
+                hidden={
+                  !!data?.subscribed || !!data?.isAdmin
+                }
+              />
+              <NavMenu data={data} />
+            </div>
+          </>
+        )}
       </div>
     </header>
   )

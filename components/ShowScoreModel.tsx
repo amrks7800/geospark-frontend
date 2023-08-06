@@ -48,7 +48,12 @@ const ShowScoreModal = ({
         </Button>
       )}
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        closeOnOverlayClick={false}
+        closeOnEsc={false}
+      >
         <ModalOverlay />
         <ModalContent>
           <ModalHeader className="block mx-auto text-primary-blue">

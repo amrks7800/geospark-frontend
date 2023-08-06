@@ -6,6 +6,7 @@ import {
   AddVideoModal,
   ChakraTable,
   StepCounter,
+  SubscriptionDrawer,
   Table,
   UserExams,
   VideoPlayer,
@@ -23,6 +24,7 @@ import { MdOutlineSubtitles } from "react-icons/md"
 import { BiLinkAlt } from "react-icons/bi"
 import { useProgressStore } from "@/store"
 import { toast } from "react-toastify"
+import { useSubscription } from "@/contexts/SubscriptionContext"
 
 type PageProps = {
   params: {
@@ -34,6 +36,7 @@ type PageProps = {
 
 const Page = ({ params }: PageProps) => {
   const [active, setActive] = useState(1)
+  const { isOpen, onClose, onOpen } = useSubscription()
 
   const setNewChapter = useProgressStore(
     state => state.setNewChapter
@@ -46,11 +49,16 @@ const Page = ({ params }: PageProps) => {
   const { data: videosResult, error } = useQuery({
     queryFn: () => getChapterVideos(params.chapterId),
     queryKey: ["video"],
+    retry(failureCount) {
+      if (failureCount === 3) return false
+      return true
+    },
   })
 
   useEffect(() => {
-    if (error) {
+    if (error && onOpen) {
       toast("انت غير مشترك", { type: "error" })
+      onOpen()
     }
   }, [error])
 
@@ -117,6 +125,12 @@ const Page = ({ params }: PageProps) => {
     } else if (params.user === "users") {
       return (
         <div className="p-4 flex-1 cut-viewport-height overflow-y-scroll">
+          <SubscriptionDrawer
+            isOpen={isOpen!}
+            onClose={onClose!}
+            onOpen={onOpen!}
+            withButton={false}
+          />
           <div className="flex items-center gap-3">
             <div className="max-sm:overflow-x-scroll flex-1 max-sm:mx-auto">
               <StepCounter
