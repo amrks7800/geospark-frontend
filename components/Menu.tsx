@@ -41,33 +41,35 @@ const NavMenu = ({ data }: MenuProps) => {
         position={"relative"}
         zIndex={500}
       >
-        <MenuItem>
-          <NavLink
-            href="/signin"
-            title="تسجيل الدخول"
-            hidden={
-              pathname.includes("signin") ||
-              pathname.includes("dashboard") ||
-              !!data?.id ||
-              pathname.includes("signin")
-            }
-          />
+        <MenuItem
+          hidden={
+            pathname.includes("signin") ||
+            pathname.includes("dashboard") ||
+            !!data?.id ||
+            pathname.includes("signin")
+          }
+        >
+          <NavLink href="/signin" title="تسجيل الدخول" />
         </MenuItem>
 
-        <MenuItem>
-          <NavLink
-            href="/signup"
-            title="التسجيل"
-            hidden={
-              pathname.includes("signin") ||
-              pathname.includes("dashboard") ||
-              !!data?.id ||
-              pathname.includes("signin")
-            }
-          />
+        <MenuItem
+          hidden={
+            pathname.includes("signin") ||
+            pathname.includes("dashboard") ||
+            !!data?.id ||
+            pathname.includes("signin")
+          }
+        >
+          <NavLink href="/signup" title="التسجيل" />
         </MenuItem>
 
-        <MenuItem>
+        <MenuItem
+          hidden={
+            pathname.includes("signin") ||
+            pathname.includes("dashboard") ||
+            pathname.includes("signin")
+          }
+        >
           <NavLink
             href={
               !!data?.isAdmin
@@ -76,11 +78,6 @@ const NavMenu = ({ data }: MenuProps) => {
             }
             title={
               !!data?.isAdmin ? "وحدة التحكم" : "الكورسات"
-            }
-            hidden={
-              pathname.includes("signin") ||
-              pathname.includes("dashboard") ||
-              pathname.includes("signin")
             }
           />
         </MenuItem>
