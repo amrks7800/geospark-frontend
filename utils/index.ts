@@ -593,3 +593,19 @@ export const getUserResultById = async (
 
   return response
 }
+
+export const getUserById = async (
+  userId: string
+): Promise<User> => {
+  const request = await fetch(`${api}/users/${userId}`, {
+    credentials: "include",
+  })
+
+  if (!request.ok) {
+    handleErrorMiddleware(request.status)
+  }
+
+  const response = await request.json()
+
+  return response
+}
