@@ -46,7 +46,7 @@ const page = ({ params: { userId } }: PageProps) => {
 
   if (results) {
     return (
-      <div className="p-4 flex-1 cut-viewport-height overflow-y-scroll">
+      <div className="p-4 flex-1 cut-viewport-height overflow-y-scroll text-center">
         {userLoading ? (
           "جاري تحميل بيانات الطالب"
         ) : user ? (
