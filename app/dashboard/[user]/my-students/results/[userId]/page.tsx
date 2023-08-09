@@ -73,7 +73,7 @@ const UserInfo = ({ user }: { user: User }) => {
   const { firstName, lastName, email, subscribed } = user
 
   return (
-    <div className="flex items-center justify-center gap-2 flex-col sm:flex-row my-3">
+    <div className="flex items-center justify-center gap-2 flex-col my-3">
       <p className="my-2 text-xl font-semibold text-primary-blue">
         الاسم:{firstName + " "}
         {lastName}
