@@ -11,7 +11,6 @@ import SidebarSwitch from "./SidebarSwitch"
 import { useSubscription } from "@/contexts/SubscriptionContext"
 import SubscriptionDrawer from "./SubscribtionDrawer"
 import { NavLink } from "./NavLink"
-import React from "react"
 
 const Navbar = () => {
   const pathname = usePathname()

@@ -240,7 +240,9 @@ export const deleteCourse = async (id: string) => {
 }
 
 export const logOut = async () => {
-  const request = await fetch(`${api}/logout`)
+  const request = await fetch(`${api}/logout`, {
+    credentials: "include",
+  })
 
   if (!request.ok) {
     handleErrorMiddleware(request.status)
