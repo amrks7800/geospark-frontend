@@ -609,3 +609,22 @@ export const getUserById = async (
 
   return response
 }
+
+export const getExamResults = async (
+  examId: string
+): Promise<Result[]> => {
+  const request = await fetch(
+    `${api}/exams/${examId}/results`,
+    {
+      credentials: "include",
+    }
+  )
+
+  if (!request.ok) {
+    handleErrorMiddleware(request.status)
+  }
+
+  const response = await request.json()
+
+  return response
+}

@@ -61,7 +61,7 @@ const page = ({ params: { userId } }: PageProps) => {
         />
         <ChakraTable
           headers={["الامتحان", "النتيجة"]}
-          type="results"
+          type="userResults"
           bodyItem={results}
         />
       </div>
@@ -80,9 +80,6 @@ const UserInfo = ({ user }: { user: User }) => {
       </p>
       <p className="my-2 text-xl font-semibold text-primary-blue">
         البريد الالكتروني: {email}
-      </p>
-      <p className="my-2 text-xl font-semibold text-primary-blue">
-        الحالة: {!!subscribed ? "مشترك" : "غير مشترك"}
       </p>
     </div>
   )

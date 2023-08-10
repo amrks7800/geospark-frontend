@@ -192,13 +192,6 @@ export interface ExamQuestionsResponse {
   >[]
 }
 
-export interface Result {
-  id: string
-  score: number
-  userId: string
-  examId: string
-}
-
 export interface ShowScoreModalProps {
   score: number
   questions: number
@@ -214,6 +207,7 @@ export interface AddUserResultProps {
 }
 
 export interface Result {
+  id: string
   result_id: string
   exam_id: string
   exam_title: string

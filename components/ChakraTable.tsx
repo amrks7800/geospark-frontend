@@ -29,7 +29,11 @@ type ChakraTableProps = {
       bodyItem: Exam[]
     }
   | {
-      type: "results"
+      type: "userResults"
+      bodyItem: Result[]
+    }
+  | {
+      type: "examResults"
       bodyItem: Result[]
     }
 )
@@ -90,6 +94,14 @@ const ChakraTable = ({
                       {item.title}
                     </Link>
                   </Td>
+                  <Td>
+                    <Link
+                      href={`${pathname}/exam-result/${item.id}`}
+                      className="text-lg text-primary-blue"
+                    >
+                      اطلع علي نتائج الطلاب
+                    </Link>
+                  </Td>
                   <Td>{i + 1}</Td>
                   <Td>
                     <BiTrash
@@ -104,7 +116,7 @@ const ChakraTable = ({
                 </Tr>
               ))}
             </Tbody>
-          ) : (
+          ) : type === "userResults" ? (
             <Tbody>
               {bodyItem.map((item, i) => (
                 <Tr key={item.id}>
@@ -114,6 +126,18 @@ const ChakraTable = ({
                 </Tr>
               ))}
             </Tbody>
+          ) : type === "examResults" ? (
+            <Tbody>
+              {bodyItem.map((item, i) => (
+                <Tr key={item.id}>
+                  <Td>{item.user_name}</Td>
+
+                  <Td>{item.user_score}</Td>
+                </Tr>
+              ))}
+            </Tbody>
+          ) : (
+            ""
           )}
         </Table>
       </TableContainer>
