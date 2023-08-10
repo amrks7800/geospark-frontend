@@ -25,7 +25,7 @@ const SignupForm = () => {
 
       queryClient.clear()
 
-      router.push("/signin")
+      router.push("/")
     },
     onError(error) {},
   })

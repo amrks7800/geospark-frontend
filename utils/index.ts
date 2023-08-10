@@ -75,6 +75,7 @@ export const signUp = async (
   const request = await fetch(`${api}/signup`, {
     method: "POST",
     body: JSON.stringify(formData),
+    credentials: "include",
     headers: {
       "Content-type": "application/json",
     },
@@ -260,6 +261,7 @@ export const getCourseChapters = async (
     `${api}/courses/${id}/chapters`,
     {
       cache: "no-store",
+      credentials: "include",
     }
   )
 
