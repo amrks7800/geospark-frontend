@@ -56,7 +56,7 @@ const Navbar = () => {
                   pathname.includes("signin") ||
                   pathname.includes("dashboard") ||
                   !!data?.id ||
-                  pathname.includes("signin")
+                  pathname.includes("signup")
                 }
               />
               <NavLink
@@ -66,7 +66,7 @@ const Navbar = () => {
                   pathname.includes("signin") ||
                   pathname.includes("dashboard") ||
                   !!data?.id ||
-                  pathname.includes("signin")
+                  pathname.includes("signup")
                 }
               />
 
@@ -84,7 +84,7 @@ const Navbar = () => {
                 hidden={
                   pathname.includes("signin") ||
                   pathname.includes("dashboard") ||
-                  pathname.includes("signin")
+                  pathname.includes("signup")
                 }
               />
 
@@ -128,71 +128,3 @@ const Navbar = () => {
   )
 }
 export default Navbar
-
-// const legacy = (
-//   <div>
-//     {pathname === "/signup" ||
-//     pathname === "/signin" ||
-//     pathname.includes("dashboard") ||
-//     data?.id ? (
-//       <>
-//         <Link
-//           href={`/dashboard/${
-//             data?.isAdmin ? "teachers" : "users"
-//           }`}
-//           className={`me-2 text-primary-blue text-lg ${
-//             pathname !== "/" ? "hidden" : "block"
-//           }`}
-//         >
-//           {`${data?.firstName}, اهلا بك | ${
-//             data?.isAdmin ? "وحدة التحكم" : "كورساتي"
-//           }`}
-//         </Link>
-//         {!data?.subscribed && (
-//           <SubscriptionDrawer
-//             onClose={onClose!}
-//             onOpen={onOpen!}
-//             isOpen={isOpen!}
-//             withButton
-//           />
-//         )}
-//       </>
-//     ) : (
-//       <>
-//         <div
-//           className="md:flex items-center justify-center gap-2 hidden"
-//           hidden={isLoading}
-//         >
-//           <Link href="/signin">
-//             <Button
-//               text="تسجيل الدخول"
-//               type="button"
-//               style="tracking-wide"
-//             />
-//           </Link>
-//           <Link
-//             href="/signup"
-//             className="text-primary-blue font-semibold text-xl w-32 text-center"
-//           >
-//             الــتــســجيل
-//           </Link>
-//         </div>
-//         <div className="md:hidden inline">
-//           <NavMenu />
-//         </div>
-//       </>
-//     )}
-
-//     {pathname.includes("dashboard") && data?.firstName ? (
-//       <h1 className="text-xl font-bold text-primary-blue flex items-center gap-2 me-2">
-//         <Avatar
-//           name={`${data?.firstName} ${data?.lastName}`}
-//         />
-
-//         <span className="sm:block hidden">{`${data?.firstName} ${data?.lastName}`}</span>
-//       </h1>
-//     ) : (
-//       ""
-//     )}
-//   </div>
-// )

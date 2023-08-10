@@ -37,8 +37,6 @@ const page = ({ params: { userId } }: PageProps) => {
     return results?.map(item => item.user_score)
   }, [results])
 
-  console.log(scoresArray)
-
   if (error || userError) {
     toast("حاول مرة اخري", { type: "error" })
     return "😢"

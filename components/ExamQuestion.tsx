@@ -36,7 +36,6 @@ export function ExamQuestion({
   const mutation = useMutation({
     mutationFn: checkAnswer,
     onSuccess: data => {
-      console.log(data.isCorrect)
       if (data.isCorrect) {
         setScore(prev => {
           if (prev !== length) {
