@@ -23,7 +23,7 @@ const Stats = ({ stats }: StatsProps) => {
 
   return (
     <StatGroup className="my-5 mx-auto w-fit">
-      <Stat className="mx-3">
+      <Stat className="mx-3 min-w-[60px]">
         <StatLabel className="text-primary-blue">
           أعلي درجة
         </StatLabel>
@@ -35,7 +35,7 @@ const Stats = ({ stats }: StatsProps) => {
         </StatHelpText>
       </Stat>
 
-      <Stat className="mx-3">
+      <Stat className="mx-3 min-w-[60px]">
         <StatLabel className="text-red-500">
           اقل درجة
         </StatLabel>
@@ -48,7 +48,7 @@ const Stats = ({ stats }: StatsProps) => {
         </StatHelpText>
       </Stat>
 
-      <Stat className="mx-3">
+      <Stat className="mx-3 min-w-[60px]">
         <StatLabel className="text-indigo-700">
           المعدل
         </StatLabel>
